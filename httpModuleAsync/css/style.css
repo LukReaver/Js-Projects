@@ -1,0 +1,24 @@
+body {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+  color: #444;
+}
+
+
+.output{
+
+
+}
+li{
+  font-size: 1rem;
+}
+ul{
+  border: 0.1rem solid #000;
+  margin: 0.2rem;
+
+}
+
+

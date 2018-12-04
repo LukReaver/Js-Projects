@@ -1,0 +1,28 @@
+body {
+  max-width: 900px;
+  margin: 0 auto;
+  font-size: 2rem;
+  font-family: "Source Sans Pro", sans-serif;
+  font-weight: 400;
+  color: #444;
+}
+
+.wrap{
+  text-align: center;
+  margin: 2rem;
+  /* padding: 2rem */
+}
+
+
+li{
+  font-size: 1rem;
+}
+.list-group{
+  padding: 0.3rem;
+}
+.list-group-item{
+  padding: 0.3rem;
+}
+
+
+

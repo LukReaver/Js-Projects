@@ -6,30 +6,34 @@
 `text,email,data,tel,number,select.radio.checkbox,textarea`
 
 - To use module you should create module instance, and pass like argument:
- - first argument: form object,
- - second argument: object with user options or empty object{}. 
+   + first argument: form object,
+   + second argument: object with user options or empty object{}. 
 
 - Usage example:
-``` const valObj = new Valid($form,{
+``` 
+const valObj = new Valid($form,{
     htmlApiValidate: false, 
     regexValidate: true,
 });
 ```
 - Default method validation is HTML5 validation API.
  - To change on regex validation you should change default options on:
+ 
   ``` 
   {
     htmlApiValidate: false, 
     regexValidate: true,
-   }```
+   }
+```
 
 - URL is retrieve from html form attribute. U can pass your own url in options object:
-   like : "url: 'https://...'"
+    like : "url: 'https://...'"
+
+- Default options:
 ```
-default options:
-    defaultOption = {
+defaultOption = {
        // HTML5 validation API - default
-       htmlApiValidate: tru
+       htmlApiValidate: true
        // RegEx validation 
        regexValidate: false,
 
@@ -52,7 +56,6 @@ default options:
       classMessage: 'succesMesage',           
 
       // get action and method from html default
-      url: form.getAttribute('action'),
-      method: form.getAttribute('method')
+      url: form.getAttribute('action')
     }
  ```

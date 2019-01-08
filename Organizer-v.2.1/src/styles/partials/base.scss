@@ -1,0 +1,372 @@
+/* 
+1.Global
+2.iframe
+3.todo
+4.aside
+ a.weather
+ b.calculator
+ c.jokes
+ d.maps
+*/
+
+/* ---------------- global ------------------ */
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background: var(--blue);
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.row,
+.col,
+[class*="col-"] {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin: 0;
+}
+
+/* ---------------- iframe ------------------ */
+.iframe {
+  height: 100vh;
+  width: 100%;
+  background: $font-color;
+  overflow: hidden;
+
+  &__item {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: block;
+    overflow: hidden;
+  }
+}
+/* ---------------- todo ------------------ */
+.todo {
+  height: 100%;
+  background: linear-gradient(to bottom, #2b66aa 0%, #158ebe 100%);
+  overflow: auto;
+
+  &__header {
+    background: linear-gradient(
+      to bottom,
+      rgba(15, 86, 158, 1),
+      rgba(53, 106, 160, 1) 0%
+    );
+    padding: 2rem 1.5rem 1rem;
+    color: $font-color;
+    text-align: center;
+
+    &--title {
+      font-size: 3.5rem;
+      margin: 1rem;
+    }
+  }
+
+  &__form {
+    &--input {
+      width: 100%;
+      border: none;
+      font-size: 1.6rem;
+      padding: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    &--select {
+      width: 100%;
+      border: 0px;
+      border-radius: 0;
+      cursor: pointer;
+      font-size: 1.6rem;
+      padding: 0.6rem 0rem;
+      margin-bottom: 1rem;
+    }
+
+    &--btn {
+      width: 100%;
+      background: $font-color;
+      font-size: 1.6rem;
+      color: $prim-color;
+
+      &:hover {
+        background-color: #555;
+        color: $font-color;
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+
+    & li {
+      cursor: pointer;
+      position: relative;
+      padding: 1.3rem 0.8rem 1.2rem 4rem;
+      background: #eee;
+      color: $font-color-dark;
+      font-size: 1.8rem;
+      transition: 0.2s;
+      user-select: none;
+
+      &:hover {
+        background: rgb(177, 177, 177);
+      }
+
+      &.checked {
+        background: #888 !important;
+        color: #fff;
+        text-decoration: line-through;
+
+        &::before {
+          content: "";
+          position: absolute;
+          border-color: #fff;
+          border-style: solid;
+          border-width: 0 0.2rem 0.2rem 0;
+          top: 1.5rem;
+          left: 1.6rem;
+          transform: rotate(45deg);
+          height: 1.5rem;
+          width: 0.7rem;
+        }
+      }
+    }
+
+    & li:nth-child(odd) {
+      background: #f9f9f9;
+    }
+
+    & .close {
+      font-size: 1.6rem;
+      color: $font-color-dark;
+      position: absolute;
+      right: 0rem;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.8;
+      padding: 1.8rem 2rem;
+
+      &:hover {
+        background-color: #222020 !important;
+        color: white;
+      }
+    }
+  }
+
+  &__empty {
+    position: relative;
+    padding: 1.2rem 0rem;
+    background: linear-gradient(
+      to bottom,
+      rgba(6, 160, 221, 1) 0%,
+      rgba(35, 83, 138, 1) 100%
+    );
+    font-size: 1.8rem;
+    transition: 0.2s;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    color: #eee;
+  }
+}
+/* ---------------- aside ------------------ */
+.aside {
+  height: 100vh;
+}
+/* <-------------  Weather  --------------->*/
+.weatherbox {
+  height: 35%;
+}
+
+.weather {
+  height: 100%;
+  width: 100%;
+  background: $prim-color;
+  color: $font-color;
+  display: grid;
+  grid-template-rows: 1fr 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "head head"
+    "temp cloud"
+    "stat1 stat2"
+    "search search";
+  text-align: center;
+
+  &__data-time {
+    grid-area: head;
+    background: $second-color;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 1.2rem;
+
+    &--date {
+      font-size: 2rem;
+    }
+
+    &--time {
+      font-size: 3rem;
+    }
+  }
+
+  &__city-temp {
+    grid-area: temp;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &--temp {
+      font-size: 3.8rem;
+      line-height: 7rem;
+    }
+
+    &--city {
+      font-size: 2rem;
+      line-height: 3rem;
+    }
+
+    &--min-max {
+      font-size: 1.6rem;
+      line-height: 3rem;
+    }
+  }
+
+  &__clouds {
+    grid-area: cloud;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    & img {
+      width: 65%;
+      height: auto;
+    }
+
+    & figcaption {
+      font-size: 2rem;
+      color: $font-color;
+      width: 100%;
+    }
+  }
+
+  &__dataLeft {
+    grid-area: stat1;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 0rem 2rem;
+  }
+
+  &__dataRight {
+    grid-area: stat2;
+    font-size: 1.3rem;
+    text-align: center;
+    padding: 0rem 2rem;
+  }
+
+  &__search {
+    grid-area: search;
+    font-size: 1.5rem;
+
+    &--input {
+      //magic white space at the bottom site
+      position: relative;
+      margin: 0 auto;
+      padding: 0.7rem 2rem;
+      width: 70%;
+    }
+    &--inputAlert {
+      border: 0.2rem solid red;
+    }
+  }
+}
+/* ---------------- calc ------------------ */
+.calcBox {
+  height: 25%;
+}
+
+.calculator {
+  height: 100%;
+  width: 100%;
+
+  &__row-input {
+    height: 20%;
+
+    &--input {
+      width: 100%;
+      height: 100%;
+      font-size: 3rem;
+      padding-right: 1.5rem;
+      text-align: right;
+    }
+  }
+
+  &__row-buttons {
+    height: 80%;
+
+    &-col {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      & .btn {
+        height: 100%;
+        border-width: 0rem 0.1rem 0.1rem 0.1rem;
+        border-color: $font-color;
+        font-size: 2rem;
+        padding: 0;
+      }
+    }
+  }
+}
+
+/* ------------------ jokes ------------------- */
+.rowJoke {
+  height: 20%;
+}
+
+.jokes {
+  height: 100%;
+  background: $prim-color;
+
+  border: 2px solid $font-color;
+  text-align: center;
+
+  &__title {
+    margin: 0 auto;
+    width: 80%;
+    font-size: 2rem;
+    padding: 0.7rem 2rem;
+    border-bottom: 1px solid $font-color;
+  }
+
+  &__joke {
+    font-size: 1.3rem;
+    padding: 1rem 2rem;
+  }
+}
+/* ----------------- maps -------------------- */
+.rowMaps {
+  height: 20%;
+}
+
+#mapid {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 2rem;
+  overflow: hidden;
+}

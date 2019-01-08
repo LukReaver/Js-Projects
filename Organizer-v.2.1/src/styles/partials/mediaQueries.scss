@@ -1,0 +1,165 @@
+/* --------------- Media Queries ----------------- */
+@media(min-width:1920px) {
+  html {
+    font-size: 62.5%;
+  }
+ }
+@media(max-width:1920px) {
+  html {
+   font-size: calc(1% + 0.5vw);
+  }
+ }
+@media(max-width:1024px) {
+  html {
+    font-size: calc(25% + 0.5vw);
+  }
+
+  .iframe {
+    height: 70vh;
+  }
+
+  .todo {
+    height: 70vh;
+  }
+
+  .aside {
+    height: 30vh;
+    display: flex !important;
+
+    .weatherbox {
+      height: 100%;
+      width: 100% !important;
+    }
+
+    .weather {    
+
+      #time {
+        font-size: 2.3rem !important;
+      }
+
+      &__city-temp {
+        &--temp {
+          font-size: 1.8rem !important;
+          line-height: 2rem;
+        }
+      }
+
+      &__clouds {
+        & img {
+          width: 35%;
+        }
+
+        & figcaption {
+          font-size: 1.5rem;
+        }
+      }
+
+      // & * {
+      //   font-size: 1.3rem;
+      // }
+    }
+
+    .calcBox {
+      height: 100%;
+      width: 100% !important;
+    }
+
+    .rowJoke {
+      height: 100%;
+      width: 100% !important;
+    }
+
+    .jokes {
+      &__joke {
+        font-size: 1.5rem;
+      }
+    }
+
+    .rowMaps {
+      height: 100%;
+      width: 100% !important;
+    }
+  }
+}
+
+@media(max-width:576px) {
+  html {
+    font-size: calc(20% + 1.5vw) !important;
+  }
+
+  .iframe {
+    height: 100vh;
+  }
+
+  .todo {
+    height: 100vh;
+  }
+
+  .aside {
+     height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+
+    .weatherbox {
+      height: 50vh;
+      width: 50% !important;
+      
+      .weather {       
+
+        #time {
+          font-size: 2.1rem !important;
+        }
+        #date {
+          font-size: 1.8rem !important;
+        }
+  
+        &__city-temp {
+          &--temp {
+            font-size: 2.8rem !important;          
+            line-height: 5rem;
+          }
+          &--city {
+            font-size: 2.3rem !important;         
+          }
+      
+          &--min-max {           
+            line-height: 2.5rem;
+           }
+        }
+  
+        &__clouds {
+          & img {
+            width:70% !important;
+          }
+  
+          & figcaption {
+            font-size: 1.8rem !important;
+          }
+        }
+        &__dataLeft {        
+          font-size: 1.5rem !important;         
+        }
+      
+        &__dataRight {         
+          font-size: 1.5rem !important;         
+        }         
+      }     
+
+    }
+
+    .calcBox {
+      height: 50vh;
+      width: 50% !important;
+    }
+
+    .rowJoke {
+      height: 50vh;
+      width: 50% !important;
+    }
+
+    .rowMaps {
+      height: 50vh;
+      width: 50% !important;
+    }
+  }
+}

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Organizer</title>
+    <meta name="description" content="MultiTool" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <!-- Font Lato -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&amp;subset=latin-ext"
+      rel="stylesheet"
+    />
+    <!-- FontAwensom -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+      integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+      crossorigin="anonymous"
+    />
+    <!-- lesflet.js -->
+    <script
+      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""
+    ></script>
+    <!-- lesflet.css -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""
+    />
+    <link
+      rel="stylesheet"
+      href="style.ff6210d77600f4ecf102.css?a4782c964b84e0170d0f"
+    />
+  </head>
+  <body>
+    <main class="wrapper ">
+      <div class="row no-gutters">
+        <!-- ----------------- iframe ------------- -->
+        <div class="col-lg-8 col-md-8 col-sm-8">
+          <section class="  iframe">
+            <iframe
+              class=" iframe__item"
+              src="https://www.google.com/intl/pl/gmail/about/"
+              scrolling="no"
+              frameborder="0"
+            ></iframe>
+          </section>
+        </div>
+        <!-- --------------- todo ----------------- -->
+        <div class="col-lg-2 col-md-4 col-sm-4">
+          <section class="todo">
+            <div class="todo__header">
+              <h2 class="todo__header--title">My To Do List</h2>
+              <form class="todo__form">
+                <div class="form-row">
+                  <div class="col-md-12 col-lg-12 col-xl-6">
+                    <label for="title"></label>
+                    <input
+                      class="todo__form--input "
+                      type="text"
+                      id="title"
+                      placeholder="Title..."
+                    />
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                    <select class="todo__form--select " id="priority">
+                      <option selected value="0">Priority none</option>
+                      <option value="1">bardzo ważne</option>
+                      <option value="2">ważne</option>
+                      <option value="3">na spokojnie</option>
+                    </select>
+                  </div>
+                  <div class="col-md-6 col-lg-6 col-xl-3">
+                    <span id="addBtn" class=" todo__form--btn btn ">Add</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="todo__empty" id="empty">Lista jest pusta :)</div>
+            <ul class="todo__list" id="list"></ul>
+          </section>
+        </div>
+        <!-- ------------- weather ---------------- -->
+        <aside class="col-lg-2 col-md-12 col-sm-12 aside">
+          <div class="weatherbox">
+            <section class="weather">
+              <div class="weather__data-time">
+                <div class="weather__data-time--date">
+                  <div id="date"></div>
+                  <div id="weekday"></div>
+                </div>
+                <div class="weather__data-time--time">
+                  <div id="time"></div>
+                </div>
+              </div>
+              <div class="weather__city-temp">
+                <div id="weatherCity" class="weather__city-temp--city">
+                  loading...
+                </div>
+                <div id="weatherTemp" class="weather__city-temp--temp"></div>
+                <div class="weather__city-temp--min-max">
+                  Max:<span id="statTempMax"></span> Min:<span
+                    id="statTempMin"
+                  ></span>
+                </div>
+              </div>
+              <figure class="weather__clouds">
+                <img id="weatherIcon" src="" alt="" />
+                <figcaption id="weatherDescription">loading...</figcaption>
+              </figure>
+              <div class="weather__dataLeft">
+                <div class="weather__stat--presure">
+                  Presure: <span id="statPresure"></span>hPa
+                </div>
+                <div class="weather__stat--humidity">
+                  Humidity: <span id="statHumidity"></span>%
+                </div>
+              </div>
+              <div class="weather__dataRight">
+                <div class="weather__stat--wind">
+                  Wind: <span id="statWind"></span>m/s
+                </div>
+                <div class="weather__stat--clouds">
+                  Clouds: <span id="statClouds"></span>%
+                </div>
+              </div>
+              <div class="weather__search">
+                <label for="weatherInput"></label>
+                <input
+                  type="search"
+                  id="weatherInput"
+                  placeholder="Check another city"
+                  class="weather__search--input"
+                />
+              </div>
+            </section>
+          </div>
+          <!-- --------------- calculator ---------------- -->
+          <div class=" calcBox ">
+            <section class="calculator" id="calculator">
+              <div class="row calculator__row-input no-gutters">
+                <div class="col-12 ">
+                  <input
+                    type="text"
+                    class="calculator__row-input--input "
+                    name="display"
+                    id="display"
+                    value="0"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="row  calculator__row-buttons no-gutters">
+                <div class="col-3 calculator__row-buttons-col">
+                  <button class="btn btn-primary ">C</button>
+                  <button class="btn btn-primary">7</button>
+                  <button class="btn btn-primary">4</button>
+                  <button class="btn btn-primary">1</button>
+                  <button class="btn btn-primary">+/-</button>
+                </div>
+                <div class="col-3 calculator__row-buttons-col">
+                  <button class="btn btn-primary ">(</button>
+                  <button class="btn btn-primary">8</button>
+                  <button class="btn btn-primary">5</button>
+                  <button class="btn btn-primary">2</button>
+                  <button class="btn btn-primary">0</button>
+                </div>
+                <div class="col-3 calculator__row-buttons-col">
+                  <button class="btn btn-primary ">)</button>
+                  <button class="btn btn-primary">9</button>
+                  <button class="btn btn-primary">6</button>
+                  <button class="btn btn-primary">3</button>
+                  <button class="btn btn-primary">.</button>
+                </div>
+                <div class="col-3 calculator__row-buttons-col">
+                  <button class="btn btn-primary ">/</button>
+                  <button class="btn btn-primary">-</button>
+                  <button class="btn btn-primary">+</button>
+                  <button class="btn btn-primary">*</button>
+                  <button class="btn btn-primary">=</button>
+                </div>
+              </div>
+            </section>
+          </div>
+          <!-- ----------- jokes ------------ -->
+          <div class=" rowJoke ">
+            <section class="jokes">
+              <h2 class="jokes__title">Random Jokes</h2>
+              <p class="jokes__joke" id="jokes"></p>
+            </section>
+          </div>
+          <!-- --------------- maps -------------- -->
+          <div class=" rowMaps "><section id="mapid">Loading...</section></div>
+        </aside>
+      </div>
+    </main>
+    <!-- --------- scripts ------------- -->
+    <script src="main.f968a9b8b0a88a0057db.js?a4782c964b84e0170d0f"></script>
+  </body>
+</html>

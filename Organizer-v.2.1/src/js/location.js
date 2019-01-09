@@ -34,7 +34,6 @@ export const getLocation = new Promise((resolve, rejects) => {
 });
 
 async function ipGeoLoc(){
-  let localIp = await axios.get( `https://api.ipify.org`).then(res=>res.data)
-  let localCords = await axios.get( `https://ipapi.co/${localIp}/json`).then(res=>res.data)
-  return localCords
+  let localIp = await axios.get( `https://ipapi.co/json`).then(res=>res.data) 
+  return localIp
 }

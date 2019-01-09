@@ -1,6 +1,6 @@
 # Organizer
 
-Run [---Organizer---](https://lukreaver.github.io/Js-Projects/Organizer DevV 2.1/dist/index.html);
+###Run [--- Organizer ---](https://lukreaver.github.io/Js-Projects/Organizer-v.2.1/dist/index.html);
 
 To build this project i use:
 - JavaScript es6

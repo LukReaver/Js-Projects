@@ -1,6 +1,6 @@
 ## Form Validation Module
 
-####[Examples link:](https://lukreaver.github.io/Js-Projects/SurveyForm-ValidationModule/index.html)
+###[ -> Example <-](https://lukreaver.github.io/Js-Projects/SurveyForm-ValidationModule/index.html)
 
 - Validation works with input types:
 `text,email,data,tel,number,select.radio.checkbox,textarea`

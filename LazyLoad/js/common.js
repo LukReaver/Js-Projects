@@ -1,7 +1,7 @@
 let $body2 = document.querySelectorAll('body img')
 
 // ------ Distance from bottom ---------
-let viewPortOffsetPercent = 30;
+let viewPortOffsetPercent = 15;
 
 // -- Main --
 preload()

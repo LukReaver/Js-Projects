@@ -45,8 +45,14 @@ async function weatherFetch(cords) {
   let url = cords;
 
   if (typeof cords === "object") {
-    const { lat, lon } = cords;
-    url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKey}`;
+    const { lat , lon } = cords;
+    if(lat && lon){
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&APPID=${apiKey}`;
+    }
+    const { latitude, longitude} = cords;
+    if(latitude && longitude){
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=metric&APPID=${apiKey}`;
+    }
   }
 
   try {

@@ -1,15 +1,15 @@
 /* --------------- Media Queries ----------------- */
-@media(min-width:1920px) {
+@media (min-width: 1920px) {
   html {
     font-size: 62.5%;
   }
- }
-@media(max-width:1920px) {
+}
+@media (max-width: 1920px) {
   html {
-   font-size: calc(1% + 0.5vw);
+    font-size: calc(1% + 0.5vw);
   }
- }
-@media(max-width:1025px) {
+}
+@media (max-width: 1025px) {
   html {
     font-size: calc(25% + 0.5vw);
   }
@@ -31,8 +31,7 @@
       width: 100% !important;
     }
 
-    .weather {    
-
+    .weather {
       #time {
         font-size: 2.3rem !important;
       }
@@ -82,7 +81,7 @@
   }
 }
 
-@media(max-width:576px) {
+@media (max-width: 576px) {
   html {
     font-size: calc(20% + 1.5vw) !important;
   }
@@ -96,55 +95,13 @@
   }
 
   .aside {
-     height: 100vh;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap;
 
     .weatherbox {
       height: 50vh;
       width: 50% !important;
-      
-      .weather {       
-
-        #time {
-          font-size: 2.1rem !important;
-        }
-        #date {
-          font-size: 1.8rem !important;
-        }
-  
-        &__city-temp {
-          &--temp {
-            font-size: 2.8rem !important;          
-            line-height: 5rem;
-          }
-          &--city {
-            font-size: 2.3rem !important;         
-          }
-      
-          &--min-max {           
-            line-height: 2.5rem;
-           }
-        }
-  
-        &__clouds {
-          & img {
-            width:70% !important;
-          }
-  
-          & figcaption {
-            font-size: 1.8rem !important;
-          }
-        }
-        &__dataLeft {        
-          font-size: 1.5rem !important;         
-        }
-      
-        &__dataRight {         
-          font-size: 1.5rem !important;         
-        }         
-      }     
-
     }
 
     .calcBox {
@@ -159,6 +116,91 @@
 
     .rowMaps {
       height: 50vh;
+      width: 50% !important;
+    }
+  }
+}
+@media only screen and(max-height:576px) and(min-width:577px) and(max-width:900px) and (orientation: landscape) {
+  html {
+    font-size: calc(20% + 1vw) !important;
+  }
+
+  .iframe {
+    height: 100vh;
+    width: 100vw;
+  }
+
+  .todo {
+    height: 100vh;
+
+    &__header {
+      padding: 0.5rem 1.5rem 1rem;
+
+      &--title {
+        font-size: 2.5rem;
+        margin: 1rem;
+      }
+    }
+    &__form {
+      &--input {
+        font-size: 1.3rem;
+        padding: 0.55rem;
+        margin-bottom: -0.7rem;
+      }
+      &--select {
+        font-size: 1.3rem;
+        padding: 0.55rem 0rem;
+        margin-bottom: 1rem;
+      }
+      &--btn {
+        font-size: 1.3rem;
+      }
+    }
+
+    &__list {
+      & li {
+        padding: 1rem 0.8rem 1rem 4rem;
+        font-size: 1.3rem;
+      }
+      & .close {
+        font-size: 1.3rem;
+        padding: 1.3rem 2rem;
+
+        &:hover {
+          background-color: #222020 !important;
+          color: white;
+        }
+      }
+    }
+
+    &__empty {
+      padding: 1rem 0rem;
+      font-size: 1.3rem;
+    }
+  }
+
+  .aside {
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+
+    .weatherbox {
+      height: 100vh;
+      width: 50% !important;
+    }
+
+    .calcBox {
+      height: 100vh;
+      width: 50% !important;
+    }
+
+    .rowJoke {
+      height: 100vh;
+      width: 50% !important;
+    }
+
+    .rowMaps {
+      height: 100vh;
       width: 50% !important;
     }
   }

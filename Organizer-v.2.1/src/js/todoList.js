@@ -109,8 +109,7 @@ function listClickHandler(event) {
   if (event.target.dataset.action === "delete") {
     deleteTodo(event.target.dataset.id);
   } else {
-    event.target.className =
-      event.target.className === "checked" ? "" : "checked";
+    event.target.classList.toggle('checked')  
   }
 }
 

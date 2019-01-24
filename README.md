@@ -16,22 +16,17 @@ and project contain also:
 - ToDo List
 - Calculator
 
-### Run [-Flappy Bird-](https://lukreaver.github.io/Js-Projects/FlappyBird-JS-/index.html);
+### Run [-Flappy Bird(PC)-](https://lukreaver.github.io/Js-Projects/FlappyBird-JS-/index.html);
 
 To build this project i use:
 - JavaScript es6
 - canvas
 
-### Run [-Arkanoid-](https://lukreaver.github.io/Js-Projects/Arkanoid-Js/index.html);
+### Run [-Arkanoid(PC)-](https://lukreaver.github.io/Js-Projects/Arkanoid-Js/index.html);
 
 To build this project i use:
 - JavaScript es6
 - canvas
-
-### Run [-LazyLoad-](https://lukreaver.github.io/Js-Projects/LazyLoad-Preload-Promise/index.html);
-
-To build this project i use:
-- JavaScript es6
 
 ### Run [-httpModule-](https://lukreaver.github.io/Js-Projects/httpModuleAsync/index.html);
 

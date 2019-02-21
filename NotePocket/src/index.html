@@ -5,31 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>NotePockets</title>
-    <meta name="description" content="MultiTool" />
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />     
+    <meta name="description" content="NotePocket" />
+    <!-- <link rel="icon" href="./favicon.ico" type="image/x-icon" /> -->
     <link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
       integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
       crossorigin="anonymous"
-    />   
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
+    />
     <link
       rel="stylesheet"
       href="<%=htmlWebpackPlugin.files.chunks.main.css %>"
     />
-    
   </head>
   <body>
+    <!-- <div id="app" class="app"> -->
 
-    <div class="wrapper">
-      <div class="row">
-        <div class="col-lg-6">
-          <div class="test"></div>
+    <section class="hero is-link is-fullheight">
+      <div class="hero-head has-background-warning">
+        <div class="container">
+          <h1 class="title  has-text-black p-md is-size-1-desktop">
+            Pocket Notes
+          </h1>
         </div>
       </div>
-    </div>
-  
+      <div class="hero-body p-md p-t-lg">
+        <div class="container">
+          <div
+            class="columns is-mobile is-multiline is-variable is-1-mobile is-2-tablet"
+          >
+            <!-- ------------------------------------------------------------------------------------------------ -->
+            <div class="column is-3-desktop is-4-tablet is-6-mobile">
+              <div class="card  has-background-warning">
+                <header class="card-header ">
+                  <p class="card-header-title ">
+                    Component
+                  </p>
+                  <span class="icon icon--rotate">
+                    <i class="fas fa-thumbtack"></i>
+                  </span>
+                  <span class="icon ">
+                    <i class="fas fa-times-circle "></i>
+                  </span>
+                </header>
+                <div class="card-content">
+                  <div class="content ">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus nec iaculis mauris. Lorem ipsum dolor sit amet,
+                    consectetur adipisicing elit. Obcaecati nihil suscipit, vero
+                    quas beatae aliquid iste voluptatibus, odit ducimus
+                    inventore, modi unde nisi quasi! Modi numquam odio quos
+                    doloremque ex.
+                  </div>
+                </div>
+                <footer class="card-footer ">
+                  <span class="card__data  card-footer-item ">12/22/08 </span>
+                </footer>
+              </div>
+            </div>
+            <!-- ------------------------------------------------------------------------------------------------ -->
+          </div>
+        </div>
+      </div>
+    </section>
+
     <script src="<%=htmlWebpackPlugin.files.chunks.main.entry %>"></script>
   </body>
 </html>
-

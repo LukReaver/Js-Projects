@@ -1,20 +1,7 @@
 
-
-@mixin media-breakpoint-up ($resol){
-    // @media screen and (min-width: $resol) { @content;}    
+@mixin media-breakpoint-up ($resol){    
     @media screen and (min-width: $resol ) { @content;}    
 }
 
-// @include media-breakpoint-up(sm) {
-//   .custom-class {
-//     display: block;
-//   }
-// }
-
-@mixin flexcenter{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 

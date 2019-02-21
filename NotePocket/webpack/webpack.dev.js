@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpack = require("webpack");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 
 const { prod_Path, src_Path } = require("./path");
 const { selectedPreprocessor } = require("./loader");
@@ -83,13 +84,18 @@ module.exports = {
   devServer: {
     hot: true,
     inline: true,
-    historyApiFallback: false,
-     noInfo: true,
+   // historyApiFallback: false,
+    // noInfo: true,
   },
   resolve: {
     extensions: [".js"]
   },
   plugins: [
+    new CopyPlugin([
+      { from: "src/js", to: "js" },     
+    ]),
+
+
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new FriendlyErrorsWebpackPlugin(),
@@ -97,7 +103,7 @@ module.exports = {
       filename: "style.css"
     }),
     new HtmlWebpackPlugin({
-      favicon: "src/favicon.ico",
+    //  favicon: "src/favicon.ico",
       inject: false,
       hash: false,
       template: "./" + src_Path + "/index.html",

@@ -1,6 +1,45 @@
-// @include media-breakpoint-up($sm) {
-//     .wrapper {
-//       background: rgb(167, 25, 25);;
-//     }
-//   }
+@include media-breakpoint-up($md) {
+    .icon {  
+      font-size: 2rem;    
+       &--rotate {
+         transform:translate(-85%, -50%) rotate(45deg);     
+      }
+    }
+    .card {
+      &-header {
+        font-size: 1.5rem;
+        &-title {
+          padding: 0.5rem;
+        }  
+      }  
+      &-content {
+        font-size: 1.2rem;     
+        line-height: 1.3rem;
+      }
+      &-footer {
+        font-size: 1.2rem;   
+      }
+    }
+    }
+  
+  @include media-breakpoint-up($lg) {
+    .icon {  
+      font-size: 2rem;  
+    }
+    .card {
+      &-header {
+        font-size: 1.8rem;
+        &-title {
+          padding: 0.5rem;
+        }  
+      }  
+      &-content {
+        font-size: 1.5rem;      
+        line-height: 1.6rem;
+      }
+      &-footer {
+        font-size: 1.4rem;    
+      }
+    }
+    }
   

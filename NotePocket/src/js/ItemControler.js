@@ -17,7 +17,7 @@ const data = {
 
 export const addItem = () =>{
 
-    const id  = data.casualNotes.length;
+    const id  =`item-${data.casualNotes.length}`;
     const item = new Card(id,'dupy','contain 2 posladki', 'white')
     data.casualNotes.push(item)
 }

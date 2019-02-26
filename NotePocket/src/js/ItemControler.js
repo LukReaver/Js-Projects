@@ -16,12 +16,29 @@ const data = {
   notesAmount:0,
 };
 
-export const addNote = () => {
+export const addNote = (noteContent) => {
+  let {title,description,color} = noteContent;
   const noteId = `item-${data.notesAmount}`;
-  const item = new Card(noteId, "dupy", "contain 2 posladki", "white");
+  switch(color) {
+    case 'Yellow':
+    color = 'has-background-warning'
+    break;
+    case 'Gray':
+    color = 'has-background-grey-lighter'
+    break;
+    case 'Blue':
+    color = 'has-background-primary'
+    break;
+    case 'Green':
+    color = 'has-background-success'
+    break;
+    default:  
+    color = 'has-background-warning'
+  } 
+  const item = new Card(noteId, title, description,color);
   data.casualNotes.push(item);
- console.log(item);
-  console.log(data.casualNotes);
+ //console.log(item);
+ // console.log(data.casualNotes);
   data.notesAmount++;
 };
 

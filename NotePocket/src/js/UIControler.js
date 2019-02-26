@@ -1,7 +1,14 @@
 export const DomElements ={
-  noteBox: document.getElementById("noteBox"),
-  addButton: document.getElementById("addNewNote"),
- delButton: document.getElementById("deleteButton"), 
+  notesBox: document.getElementById("noteBox"),
+ openModal: document.getElementById("openNote"),
+ closeModal: document.getElementById("closeModal"), 
+ modal: document.getElementById("modalNewCard"), 
+ //delButton: document.getElementById("deleteButton"), 
+ noteTitle: document.getElementById("noteTitle"), 
+ noteDescription: document.getElementById("noteDescription"), 
+ noteColor: document.getElementById("noteColor"), 
+ //-----
+ addNewNote: document.getElementById("addNewNote"), 
 }
 
 // const noteDelete = document.getElementById("deleteButton");
@@ -9,17 +16,17 @@ export const DomElements ={
 // const addNewNote = document.getElementById("addNewNote");
 
 export const paintNotes = noteContent => {
-  DomElements.noteBox.innerHTML = '';
+  DomElements.notesBox.innerHTML = '';
   noteContent.forEach(el => {
     const note = `<div class="column is-3-desktop is-4-tablet is-6-mobile" id="${el.id}">
-      <div class="card has-background-warning" >
+      <div class="card ${el.color}" >
       <header class="card-header">
       <p class="card-header-title">${el.title}</p>
       <span class="icon icon--rotate" id="pinButton">
       <i class="fas fa-thumbtack"></i>
       </span>
       <span class="icon" >
-      <i class="fas fa-times-circle" id="deleteButton" data-id="${el.id}"></i>
+      <i class="fas fa-times-circle has-text-danger" id="deleteButton" data-id="${el.id}"></i>
       </span>
       </header>
       <div class="card-content">
@@ -30,12 +37,26 @@ export const paintNotes = noteContent => {
       </footer>
       </div>
       </div>`;  
-    DomElements.noteBox.innerHTML += note;    
+    DomElements.notesBox.innerHTML += note;    
   });
 };
 
 export function addListItem(notesList){
   paintNotes(notesList);
+}
+export function toggleModal(){
+  DomElements.modal.classList.toggle('is-active')
+  DomElements.noteTitle.value = ''
+  DomElements.noteDescription.value = ''
+  DomElements.noteColor.options[0].selected  = true;
+}
+export function ModalValues(){  
+  return{
+    title:DomElements.noteTitle.value,
+    description:DomElements.noteDescription.value,
+    color:DomElements.noteColor.value,
+  }
+ // console.log(cos)
 }
 export function deleteListItem(idValue){
   const itemID = `#${idValue.id}`;

@@ -36,14 +36,64 @@
       <div class="hero-body p-md p-t-lg">
         <div class="container">
           <div class="column is-3-desktop is-4-tablet is-6-mobile">
-              <a class="button is-warning" id="addNewNote">
-                  Add New Note
-                </a>
+            <a class="button is-warning" id="openNote">
+              Add New Note
+            </a>
           </div>
+          <!-- ------------------------------------------------------------------------------------------------ -->
           <div
-            class="columns is-mobile is-multiline is-variable is-1-mobile is-2-tablet" id="noteBox">
-            <!-- ------------------------------------------------------------------------------------------------ -->
-            <!-- ------------------------------------------------------------------------------------------------ -->
+            class="columns is-mobile is-multiline is-variable is-1-mobile is-2-tablet"
+            id="noteBox"
+          ></div>
+          <!-- ------------------------------------------------------------------------------------------------ -->
+          <div class="modal " id="modalNewCard">
+            <div class="modal-background"></div>
+            <div class="modal-card ">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">New note</p>
+                    <button class="delete" aria-label="close" id="closeModal"></button>
+                  </header>
+              <section class="modal-card-body ">
+                <div class="field">
+                  <label class="label is-medium">Title</label>                 
+                  <div class="control">
+                    <input class="input" type="text" placeholder="Title..." id="noteTitle" required/>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label is-medium">Description</label>
+                  <div class="control">
+                    <textarea
+                      class="textarea"
+                      placeholder="Description..."
+                      id="noteDescription"
+                       required
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label is-medium">Color</label>
+                  <div class="control">
+                    <div class="select">
+                      <select id="noteColor">
+                        <option class="has-background-warning">Yellow</option>
+                        <option class="has-background-danger">Gray</option>
+                        <option class="has-background-success">Green</option>
+                        <option class="has-background-primary">Blue</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field is-grouped is-grouped-centered">
+                  <div class="control">
+                    <button class="button is-info" id="resetModal">Reset</button>
+                  </div>
+                  <div class="control">
+                    <button class="button is-link" id="addNewNote">Add</button>
+                  </div>
+                </div>
+              </section>
+            </div>
           </div>
         </div>
       </div>

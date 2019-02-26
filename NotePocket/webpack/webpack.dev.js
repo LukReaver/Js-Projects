@@ -10,15 +10,17 @@ const { selectedPreprocessor } = require("./loader");
 
 module.exports = {
   entry: {
-    main: ["@babel/polyfill", "./" + src_Path + "/index.js"]
+    main: [
+      //"@babel/polyfill",
+       "./" + src_Path + "/index.js"]
   },
   output: {
     path: path.resolve(__dirname, prod_Path),
     filename: "[name].[hash].js"
   },
   // devtool: "cheap-module-source-map",
-  // devtool: "source-map",
-  devtool: "inline-source-map",
+   devtool: "source-map",
+ // devtool: "inline-source-map",
 
   cache: true,
   watch: true,
@@ -42,7 +44,7 @@ module.exports = {
                 [
                   "@babel/preset-env",
                   {
-                    useBuiltIns: "usage"
+                  //  useBuiltIns: "usage"
                     // debug: true
                   }
                 ]
@@ -91,9 +93,9 @@ module.exports = {
     extensions: [".js"]
   },
   plugins: [
-    new CopyPlugin([
-      { from: "src/js", to: "js" },     
-    ]),
+    // new CopyPlugin([
+    //   { from: "src/js", to: "js" },     
+    // ]),
 
 
     new webpack.HotModuleReplacementPlugin(),

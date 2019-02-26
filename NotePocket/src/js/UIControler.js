@@ -1,43 +1,44 @@
-const noteBox = document.getElementById("noteBox");
-const noteDelete = document.getElementById("deleteButton");
-const notePin = document.getElementById("pinButton");
-const addNewNote = document.getElementById("addNewNote");
+export const DomElements ={
+  noteBox: document.getElementById("noteBox"),
+  addButton: document.getElementById("addNewNote"),
+ delButton: document.getElementById("deleteButton"), 
+}
 
-export const addNote = noteContent => {
-  const note = `<div class="column is-3-desktop is-4-tablet is-6-mobile">
-    <div class="card has-background-warning" data-id="${noteContent.id}">
-    <header class="card-header">
-    <p class="card-header-title">${noteContent.title}</p>
-    <span class="icon icon--rotate" id="pinButton">
-    <i class="fas fa-thumbtack"></i>
-    </span>
-    <span class="icon" id="deleteButton">
-    <i class="fas fa-times-circle "></i>
-    </span>
-    </header>
-    <div class="card-content">
-    <div class="content">${noteContent.description}</div>
-    </div>
-    <footer class="card-footer ">
-    <span class="card__data  card-footer-item ">${noteContent.date}</span>
-    </footer>
-    </div>
-    </div>`;
+// const noteDelete = document.getElementById("deleteButton");
+// const notePin = document.getElementById("pinButton");
+// const addNewNote = document.getElementById("addNewNote");
 
-  noteBox.appendChild(note);
+export const paintNotes = noteContent => {
+  DomElements.noteBox.innerHTML = '';
+  noteContent.forEach(el => {
+    const note = `<div class="column is-3-desktop is-4-tablet is-6-mobile" id="${el.id}">
+      <div class="card has-background-warning" >
+      <header class="card-header">
+      <p class="card-header-title">${el.title}</p>
+      <span class="icon icon--rotate" id="pinButton">
+      <i class="fas fa-thumbtack"></i>
+      </span>
+      <span class="icon" >
+      <i class="fas fa-times-circle" id="deleteButton" data-id="${el.id}"></i>
+      </span>
+      </header>
+      <div class="card-content">
+      <div class="content">${el.description}</div>
+      </div>
+      <footer class="card-footer ">
+      <span class="card__data  card-footer-item ">${el.date}</span>
+      </footer>
+      </div>
+      </div>`;  
+    DomElements.noteBox.innerHTML += note;    
+  });
 };
 
-noteDelete.addEventListener('click',(e)=>{
-e.preventDefault()
-// let cos = e.target.dataset.id;
-// console.log(cos)
-    
-})
-pinDelete.addEventListener('click',(e)=>{
-e.preventDefault();
-
-})
-addNewNote.addEventListener('click',(e)=>{
-e.preventDefault();
-
-})
+export function addListItem(notesList){
+  paintNotes(notesList);
+}
+export function deleteListItem(idValue){
+  const itemID = `#${idValue.id}`;
+  const item = document.querySelector(itemID);
+  item.remove();
+}

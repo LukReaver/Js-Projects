@@ -1,7 +1,9 @@
 
  import "./styles/style.scss";
+ import * as App from './js/appControler';
 //import Bricks from 'bricks.js'
 
+//App;
 // "use strict";
 
 // /* --- main --- */

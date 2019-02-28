@@ -3,7 +3,7 @@
  import * as App from './js/appControler';
 //import Bricks from 'bricks.js'
 
-//App;
+App;
 // "use strict";
 
 // /* --- main --- */

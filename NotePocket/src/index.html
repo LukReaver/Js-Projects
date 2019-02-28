@@ -46,7 +46,7 @@
             id="noteBox"
           ></div>
           <!-- ------------------------------------------------------------------------------------------------ -->
-          <div class="modal " id="modalNewCard">
+          <div class="modal" id="modalNewCard">
             <div class="modal-background"></div>
             <div class="modal-card ">
                 <header class="modal-card-head">
@@ -55,9 +55,15 @@
                   </header>
               <section class="modal-card-body ">
                 <div class="field">
+                  <label class="label"></label>                 
+                  <div class="control">
+                    <input class="input" type="hidden" placeholder="Title..." id="modalNoteId" />
+                  </div>
+                </div>
+                <div class="field">
                   <label class="label is-medium">Title</label>                 
                   <div class="control">
-                    <input class="input" type="text" placeholder="Title..." id="noteTitle" required/>
+                    <input class="input" type="text" placeholder="Title..." id="modalNoteTitle" required/>
                   </div>
                 </div>
                 <div class="field">
@@ -66,7 +72,7 @@
                     <textarea
                       class="textarea"
                       placeholder="Description..."
-                      id="noteDescription"
+                      id="modalNoteDescription"
                        required
                     ></textarea>
                   </div>
@@ -75,7 +81,7 @@
                   <label class="label is-medium">Color</label>
                   <div class="control">
                     <div class="select">
-                      <select id="noteColor">
+                      <select id="modalNoteColor">
                         <option class="has-background-warning">Yellow</option>
                         <option class="has-background-danger">Gray</option>
                         <option class="has-background-success">Green</option>

@@ -88,7 +88,7 @@ module.exports = {
       filename: "style.[contenthash].css"
     }),
     new HtmlWebpackPlugin({
-     // favicon: "src/favicon.ico",
+     favicon: "src/favicon.ico",
       inject: false,
       hash: true,
       template: "./" + src_Path + "/index.html",

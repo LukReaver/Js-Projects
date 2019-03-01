@@ -1,25 +1,21 @@
+// DOM elements
 export const DomElements ={
   notesBox: document.getElementById("noteBox"),
  openModal: document.getElementById("openNote"),
  closeModal: document.getElementById("closeModal"), 
- modal: document.getElementById("modalNewCard"), 
+ //pinNote: document.getElementById("pinButton"), 
  //delButton: document.getElementById("deleteButton"), 
+ modal: document.getElementById("modalNewCard"), 
  modalNoteId: document.getElementById("modalNoteId"), 
  modalNoteTitle: document.getElementById("modalNoteTitle"), 
  modalNoteDescription: document.getElementById("modalNoteDescription"), 
  modalNoteColor: document.getElementById("modalNoteColor"), 
 //----
-//  noteTitle: document.getElementById("noteTitle"), 
-//  noteDescription: document.getElementById("noteDescription"), 
-//  noteColor: document.getElementById("noteColor"), 
- //-----
  addNewNote: document.getElementById("addNewNote"), 
+ resetModalNote: document.getElementById("resetModal"), 
 }
 
-// const noteDelete = document.getElementById("deleteButton");
-// const notePin = document.getElementById("pinButton");
-// const addNewNote = document.getElementById("addNewNote");
-
+// Paints notes
 export const paintNotes = notesList => {
   DomElements.notesBox.innerHTML = '';
   notesList.forEach(el => {
@@ -27,8 +23,8 @@ export const paintNotes = notesList => {
       <div class="card ${el.color}" >
       <header class="card-header">
       <p class="card-header-title" >${el.title}</p>
-      <span class="icon icon--rotate" >
-      <i class="fas fa-thumbtack" id="pinButton"></i>
+      <span class="icon icon--rotate ${(el.isPined)? 'icon--rotatePined':'icon--rotate'}" >
+      <i class="fas fa-thumbtack" id="pinButton" data-id="${el.id}"></i>
       </span>
       <span class="icon" >
       <i class="fas fa-times-circle has-text-danger" id="deleteButton" data-id="${el.id}"></i>
@@ -46,15 +42,17 @@ export const paintNotes = notesList => {
   });
 };
 
-export function addListItem(notesList){
-  paintNotes(notesList);
-  //targetElement.insertAdjacentElement(position, element);
+// Repaint notes
+export function addListItem(notesList){ 
+  paintNotes(notesList); 
 }
+// Delete note
 export function deleteListItem(idValue){
   const itemID = `#${idValue.id}`;
   const item = document.querySelector(itemID);
   item.remove();
 }
+// On/Off modal
 export function toggleModal(){
   DomElements.modal.classList.toggle('is-active')
   DomElements.addNewNote.textContent = 'Add';
@@ -62,6 +60,14 @@ export function toggleModal(){
   DomElements.modalNoteDescription.value = ''
   DomElements.modalNoteColor.options[0].selected  = true;
 }
+// reset modal values
+export function resetModal(){
+  DomElements.modalNoteTitle.value = '' 
+  DomElements.modalNoteDescription.value = ''
+  DomElements.modalNoteColor.options[0].selected  = true;
+}
+
+// Get modal values
 export function getModalValues(){  
   return{
     id:DomElements.modalNoteId.value,
@@ -70,6 +76,8 @@ export function getModalValues(){
     color:DomElements.modalNoteColor.value,
   }
 }
+
+// Set modal values
 export function setModalValues(elem){  
    DomElements.modalNoteId.value = elem.id
    DomElements.modalNoteTitle.value = elem.title

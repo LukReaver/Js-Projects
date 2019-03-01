@@ -1,3 +1,5 @@
+
+// Class note
 class Card {
   constructor(id, title, desc, color) {
     this.id = id;
@@ -9,13 +11,14 @@ class Card {
   }
 }
 
+ // Data Structure / State
 const data = {
   casualNotes: [],
-  pinedNotes: [],
-  currentItem: null,
+//  currentItem: null,
   notesAmount: 0
 };
 
+// Add note in to array
 export const addNote = noteContent => {
   let { title, description, color } = noteContent;
   const noteId = `item-${data.notesAmount}`;
@@ -37,76 +40,74 @@ export const addNote = noteContent => {
   }
   const item = new Card(noteId, title, description, color);
   data.casualNotes.push(item);
-  console.log(item);
-  // console.log(data.casualNotes);
+  console.log(item);  
   data.notesAmount++;
 };
 
+// Update item into array
 export const updateListItem = noteElem => {
   console.log(noteElem);
   data.casualNotes.forEach(el => {
     if (el.id == noteElem.id) {
       el.title = noteElem.title;
-      el.description = noteElem.description;  
+      el.description = noteElem.description;
       switch (noteElem.color) {
         case "Yellow":
-        el.color =  "has-background-warning";
+          el.color = "has-background-warning";
           break;
         case "Gray":
-        el.color =  "has-background-grey-lighter";
+          el.color = "has-background-grey-lighter";
           break;
         case "Blue":
-        el.color =  "has-background-primary";
+          el.color = "has-background-primary";
           break;
         case "Green":
-        el.color =  "has-background-success";
+          el.color = "has-background-success";
           break;
         default:
-        el.color =  "has-background-warning";
-      }      
-      el.date = new Date().toLocaleDateString();      
-      //console.log(el);
+          el.color = "has-background-warning";
+      }
+      el.date = new Date().toLocaleDateString();     
     }
   });
 };
-export const getListItem = noteID => {
-  // data.casualNotes.find(el => {
-  //       console.log(el);
-  //   return el.id == noteID.id
 
-  // });
-  // var result = data.casualNotes.forEach((el) => {
-  //   if(el.id == noteID.id){
-  //           console.log(el);
-  //     return el;
-  //   }
-  // });
-  var result = data.casualNotes.filter(obj => {   
+// Get item from array
+export const getListItem = noteID => {
+  var result = data.casualNotes.filter(obj => {
     return obj.id === noteID;
   });
   return result[0];
 };
-
+//get notes array
 export const getNoteList = () => {
   return data.casualNotes;
 };
+//Delete item array
 export const deleteListItem = passElem => {
   console.log(passElem);
 
   data.casualNotes.forEach((el, key) => {
     if (el.id === passElem.id) {
-      data.casualNotes.splice(key, 1);
-      //console.log(data.casualNotes);
+      data.casualNotes.splice(key, 1);    
     }
   });
 };
-export const pinListItem = passElem => {
-  console.log(passElem);
-  let = cos;
-  data.casualNotes.forEach((el, key) => {
-    if (el.id === passElem.id) {
-      cos = data.casualNotes.pop(key);
-      console.log("PIN"+cos);
+
+// move item on front of array 
+export const pinListItem = elemID => {
+  data.casualNotes.forEach(el => {
+    if (el.id === elemID.id) {
+      el.isPined = !el.isPined;    
     }
   });
+  
+  let pinedList = data.casualNotes.filter((el)=>{
+    return el.isPined === true;
+  })
+  let unPinedList = data.casualNotes.filter((el)=>{
+    return el.isPined != true;
+  })
+  data.casualNotes = pinedList.concat(unPinedList);  
+
 };

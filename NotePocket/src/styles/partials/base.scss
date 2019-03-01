@@ -4,6 +4,10 @@ body {
 
 .hero.is-fullheight .hero-body {
   align-items: flex-start;
+  padding-top: 0.3rem;
+}
+#openNote{
+  margin: 1rem;
 }
 
 .icon {
@@ -14,13 +18,18 @@ body {
   top: 0;
   right: 0;
   transform: translate(0%, -50%);
-  color: #000;
+  color: rgb(44, 44, 44);
    background: rgb(255, 255, 255);
    border-radius:50%;
    &--rotate {
      transform:translate(-65%, -50%) rotate(45deg);  
      background: none;
-  }
+    }
+    &--rotatePined {
+      transform:translate(-65%, -50%) ; 
+      color:black ;    
+      background: none;
+    }  
 }
 .card {
   &-header {
@@ -35,7 +44,7 @@ body {
     max-height: 24vh;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: 1.1rem;
+    line-height: 1.3rem;
   }
   &-footer {
     font-size: 0.8rem;

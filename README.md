@@ -16,6 +16,11 @@ and project contain also:
 - ToDo List
 - Calculator
 
+### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html);
+
+To build this project i use:
+- JavaScript es6
+
 ### Run [-Flappy Bird(PC)-](https://lukreaver.github.io/Js-Projects/FlappyBird-JS-/index.html);
 
 To build this project i use:

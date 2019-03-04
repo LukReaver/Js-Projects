@@ -1,0 +1,50 @@
+html {
+  font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.row,
+ .col,
+ [class*="col-"] {
+   padding-right: 0.5rem;
+   padding-left: 0.5rem;
+   margin: 0;
+}
+
+
+
+body {
+  /* font-family: 'Roboto', sans-serif; */
+  width: 100%;
+  min-height: 100vh;
+  /* background: linear-gradient(45deg, rgba(255, 255, 255, 0.602) 0%, rgba(238, 238, 238, 0.95) 100%), url(../image/writing-1149962_1920.jpg)center center no-repeat; */
+  /* background-size: cover; */
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  font-size: 2rem;
+}
+/* button{
+  margin: 1rem;
+  padding: 1rem;
+} */
+.button{
+  background: rgb(36, 145, 235);
+  border: 0.2rem solid #000;
+  
+  /* height: 5rem; */
+  width: 100%;
+  height: 25vh;
+  border-radius:1rem;
+}
+.press{
+  background: rgb(38, 211, 32);
+
+}

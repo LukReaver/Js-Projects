@@ -1,5 +1,5 @@
-
 // Modules import
+//import * as StorageCtrl from "./storageControler";
 import * as ItemCtrl from "./ItemControler";
 import * as UiCtrl from "./UIControler";
 
@@ -22,34 +22,44 @@ document.body.addEventListener("click", function(evt) {
   }
 });
 
+export function init() {
+  const noteList = ItemCtrl.getItemsList();
+  ItemCtrl.orderNotesList();
+  console.log(noteList);
+  UiCtrl.paintNotes(noteList);
+}
+
 // Init update item
 function updateItem(elemID) {
-  const notesListItem = ItemCtrl.getListItem(elemID);
+  const noteItem = ItemCtrl.getItem(elemID);
   UiCtrl.toggleModal();
   UiCtrl.DomElements.addNewNote.textContent = "Update";
-  UiCtrl.setModalValues(notesListItem);
+  UiCtrl.setModalValues(noteItem);
   // finish in addORUpdateItem()
 }
 
 //Add or Update note
 function addORUpdateItem(e) {
   e.preventDefault();
-  const noteList = ItemCtrl.getNoteList();
+  // Get Items list
+  let noteList;
   // Checking method type
   const method = UiCtrl.DomElements.addNewNote.textContent;
+  
   // If method is 'Add', add item into list.
   if (method === "Add") {
-    console.log("add");
     const noteContent = UiCtrl.getModalValues();
-    ItemCtrl.addNote(noteContent);
-    UiCtrl.addListItem(noteList);
+    ItemCtrl.addItem(noteContent);
+    noteList = ItemCtrl.getItemsList();
+    UiCtrl.paintNotes(noteList);
     UiCtrl.toggleModal();
+
     // If method is 'Update',update list item.
   } else if (method === "Update") {
-    console.log("update");
     const noteContent = UiCtrl.getModalValues();
-    ItemCtrl.updateListItem(noteContent);
-    UiCtrl.addListItem(noteList);
+    ItemCtrl.updateItem(noteContent);
+    noteList = ItemCtrl.getItemsList();
+    UiCtrl.paintNotes(noteList);
     UiCtrl.toggleModal();
   }
 }
@@ -58,21 +68,20 @@ function addORUpdateItem(e) {
 function deleteItem(evt) {
   evt.preventDefault();
   const noteBox = evt.target.closest(`#${evt.target.dataset.id}`);
-  ItemCtrl.deleteListItem(noteBox);
-  UiCtrl.deleteListItem(noteBox);  
+  ItemCtrl.deleteItem(noteBox);
+  UiCtrl.deleteListItem(noteBox);
 }
 
 // Reset Modal values
-function resetNote() {  
-  UiCtrl.resetModal(); 
+function resetNote() {
+  UiCtrl.resetModal();
 }
 
 // Add note into front of list
 function pinItem(evt) {
   const cardID = evt.target.closest(`#${evt.target.dataset.id}`);
-  //const cardPin = evt.target.parentElement;
-  ItemCtrl.pinListItem(cardID);
- // UiCtrl.pinListItem(cardPin);
-  const noteList = ItemCtrl.getNoteList();
-  UiCtrl.addListItem(noteList);
+  ItemCtrl.pinItem(cardID);
+  const noteList = ItemCtrl.getItemsList();
+  // console.log(noteList);
+  UiCtrl.paintNotes(noteList);
 }

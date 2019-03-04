@@ -3,7 +3,7 @@
  import * as App from './js/appControler';
 
 // init App
-App;
+App.init();
 
 // HMR 
 if (module.hot) {

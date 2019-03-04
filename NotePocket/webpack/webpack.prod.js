@@ -53,8 +53,8 @@ module.exports = {
               [
                 "@babel/preset-env",
                 {
-                  useBuiltIns: "usage",
-                  debug: true
+                  //useBuiltIns: "usage",
+                  //debug: true
                 }
               ]
             ]

@@ -1,3 +1,4 @@
+import * as StorageCtrl from "./storageControler";
 
 // Class note
 class Card {
@@ -11,17 +12,37 @@ class Card {
   }
 }
 
- // Data Structure / State
+// Data Structure / State
 const data = {
-  casualNotes: [],
-//  currentItem: null,
-  notesAmount: 0
+  NotesList: StorageCtrl.getList(),
+  notesAmount: StorageCtrl.getListLength() || 0
+};
+
+//Reset Modal values
+function pullNotesList() {
+  data.NotesList = StorageCtrl.getList();
+}
+export function orderNotesList() {
+  data.NotesList = StorageCtrl.getList();
+  let pinedList = data.NotesList.filter(el => {
+    return el.isPined === true;
+  });
+  let unPinedList = data.NotesList.filter(el => {
+    return el.isPined != true;
+  });
+  data.NotesList = pinedList.concat(unPinedList);
+  StorageCtrl.setList(data.NotesList)
+}
+
+//get notes array
+export const getItemsList = () => {
+  return data.NotesList;
 };
 
 // Add note in to array
-export const addNote = noteContent => {
+export const addItem = noteContent => {
   let { title, description, color } = noteContent;
-  const noteId = `item-${data.notesAmount}`;
+  const noteId = `index-${data.notesAmount}`;
   switch (color) {
     case "Yellow":
       color = "has-background-warning";
@@ -38,76 +59,60 @@ export const addNote = noteContent => {
     default:
       color = "has-background-warning";
   }
-  const item = new Card(noteId, title, description, color);
-  data.casualNotes.push(item);
-  console.log(item);  
+  const item = new Card(noteId, title, description, color);  
+  StorageCtrl.putItem(item);
+  pullNotesList();  
   data.notesAmount++;
 };
 
 // Update item into array
-export const updateListItem = noteElem => {
+export const updateItem = noteElem => {
   console.log(noteElem);
-  data.casualNotes.forEach(el => {
-    if (el.id == noteElem.id) {
-      el.title = noteElem.title;
-      el.description = noteElem.description;
-      switch (noteElem.color) {
-        case "Yellow":
-          el.color = "has-background-warning";
-          break;
-        case "Gray":
-          el.color = "has-background-grey-lighter";
-          break;
-        case "Blue":
-          el.color = "has-background-primary";
-          break;
-        case "Green":
-          el.color = "has-background-success";
-          break;
-        default:
-          el.color = "has-background-warning";
-      }
-      el.date = new Date().toLocaleDateString();     
-    }
-  });
+  switch (noteElem.color) {
+    case "Yellow":
+      noteElem.color = "has-background-warning";
+      break;
+    case "Gray":
+      noteElem.color = "has-background-grey-lighter";
+      break;
+    case "Blue":
+      noteElem.color = "has-background-primary";
+      break;
+    case "Green":
+      noteElem.color = "has-background-success";
+      break;
+    default:
+      noteElem.color = "has-background-warning";
+  }
+  StorageCtrl.updateNote(noteElem);
+  pullNotesList();
 };
 
 // Get item from array
-export const getListItem = noteID => {
-  var result = data.casualNotes.filter(obj => {
-    return obj.id === noteID;
-  });
-  return result[0];
-};
-//get notes array
-export const getNoteList = () => {
-  return data.casualNotes;
-};
-//Delete item array
-export const deleteListItem = passElem => {
-  console.log(passElem);
-
-  data.casualNotes.forEach((el, key) => {
-    if (el.id === passElem.id) {
-      data.casualNotes.splice(key, 1);    
-    }
-  });
+export const getItem = noteID => {
+  return StorageCtrl.getItem(noteID);
 };
 
-// move item on front of array 
-export const pinListItem = elemID => {
-  data.casualNotes.forEach(el => {
+// Delete item array
+export const deleteItem = passElem => {
+  StorageCtrl.deleteNote(passElem);
+  pullNotesList();
+};
+
+// move item on front of array
+export const pinItem = elemID => {
+  data.NotesList.forEach(el => {
     if (el.id === elemID.id) {
-      el.isPined = !el.isPined;    
+      el.isPined = !el.isPined;
+      StorageCtrl.updateNote(el);
     }
   });
-  
-  let pinedList = data.casualNotes.filter((el)=>{
-    return el.isPined === true;
-  })
-  let unPinedList = data.casualNotes.filter((el)=>{
-    return el.isPined != true;
-  })
-  data.casualNotes = pinedList.concat(unPinedList);  
 
+  let pinedList = data.NotesList.filter(el => {
+    return el.isPined === true;
+  });
+  let unPinedList = data.NotesList.filter(el => {
+    return el.isPined != true;
+  });
+  data.NotesList = pinedList.concat(unPinedList);
 };

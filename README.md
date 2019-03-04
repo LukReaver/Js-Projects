@@ -16,7 +16,7 @@ and project contain also:
 - ToDo List
 - Calculator
 
-### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html);
+### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html)-;
 
 To build this project i use:
 - JavaScript es6

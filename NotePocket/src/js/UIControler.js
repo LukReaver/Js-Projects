@@ -2,21 +2,22 @@
 export const DomElements ={
   notesBox: document.getElementById("noteBox"),
  openModal: document.getElementById("openNote"),
- closeModal: document.getElementById("closeModal"), 
- //pinNote: document.getElementById("pinButton"), 
- //delButton: document.getElementById("deleteButton"), 
+ closeModal: document.getElementById("closeModal"),   
  modal: document.getElementById("modalNewCard"), 
  modalNoteId: document.getElementById("modalNoteId"), 
  modalNoteTitle: document.getElementById("modalNoteTitle"), 
  modalNoteDescription: document.getElementById("modalNoteDescription"), 
  modalNoteColor: document.getElementById("modalNoteColor"), 
-//----
+ modalNoteDate: document.getElementById("modalNoteDate"),
  addNewNote: document.getElementById("addNewNote"), 
  resetModalNote: document.getElementById("resetModal"), 
 }
 
 // Paints notes
 export const paintNotes = notesList => {
+if(notesList === null){
+  return;
+}
   DomElements.notesBox.innerHTML = '';
   notesList.forEach(el => {
     const note = `<div class="column is-3-desktop is-4-tablet is-6-mobile" id="${el.id}">
@@ -68,18 +69,20 @@ export function resetModal(){
 }
 
 // Get modal values
-export function getModalValues(){  
+export function getModalValues(){    
   return{
     id:DomElements.modalNoteId.value,
     title:DomElements.modalNoteTitle.value || 'Title',
     description:DomElements.modalNoteDescription.value || 'Description',
-    color:DomElements.modalNoteColor.value,
+    color:DomElements.modalNoteColor.value,    
+    date:DomElements.modalNoteDate.value,
   }
 }
 
 // Set modal values
 export function setModalValues(elem){  
    DomElements.modalNoteId.value = elem.id
+   DomElements.modalNoteDate.value = elem.date
    DomElements.modalNoteTitle.value = elem.title
    DomElements.modalNoteDescription.value = elem.description;
  switch(elem.color) {

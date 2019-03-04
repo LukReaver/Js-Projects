@@ -23,15 +23,15 @@ function pullNotesList() {
   data.NotesList = StorageCtrl.getList();
 }
 export function orderNotesList() {
-  data.NotesList = StorageCtrl.getList();
+  data.NotesList = StorageCtrl.getList() ;
   let pinedList = data.NotesList.filter(el => {
     return el.isPined === true;
   });
   let unPinedList = data.NotesList.filter(el => {
     return el.isPined != true;
   });
-  data.NotesList = pinedList.concat(unPinedList);
   StorageCtrl.setList(data.NotesList)
+  return data.NotesList = pinedList.concat(unPinedList);
 }
 
 //get notes array

@@ -22,10 +22,9 @@ document.body.addEventListener("click", function(evt) {
   }
 });
 
-// Init App
 export function init() {
-  const noteList = ItemCtrl.orderNotesList();
- // const noteList = ItemCtrl.getItemsList();
+  ItemCtrl.orderNotesList();
+  const noteList = ItemCtrl.getItemsList();
   console.log(noteList);
   UiCtrl.paintNotes(noteList);
 }

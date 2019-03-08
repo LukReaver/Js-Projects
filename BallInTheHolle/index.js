@@ -1,4 +1,4 @@
-import Circle  from './js/Ball.js';
+import Circle from "./js/Ball.js";
 
 const canvas = document.getElementById("app");
 // window.addEventListener("deviceorientation", orientationHandler);
@@ -17,6 +17,7 @@ let topBorder = 0 + radius;
 let bottomBorder = canvas.clientHeight - radius;
 let blackBall;
 const rndArray = [];
+let order = 0;
 
 if (canvas.getContext) {
   // canvas.addEventListener('mousemove',fnct)
@@ -38,6 +39,7 @@ if (canvas.getContext) {
 function animationLoop() {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
+  blackBall.draw();
   for (let el of rndArray) {
     el.draw();
   }
@@ -103,28 +105,34 @@ function mouse(e) {
   blackBall.x = e.layerX;
   blackBall.y = e.layerY;
   // blackBall.update();
+  // ballSequence(order)
+
+  for (let i = 0; i < rndArray.length; i++) {
+    // console.log(getDistance(blackBall,rndArray[i]));
+    if (getDistance2(blackBall, rndArray[i]) && i === order) {
+      _.debounce(ballSequence(), 1000);
+      console.log("dupa");
+      console.log(order);
+    }
+  }
 }
 
-function drawRandomPositions(dlug) {
-  //----losowanie bez kolizji
-  //-
-  rndArray.push(blackBall);
-
+function drawRandomPositions(amount) {
   const minX = radius;
   const maxX = canvas.clientWidth - radius;
   const minY = radius;
   const maxY = canvas.clientHeight - radius;
 
-  for (let i = 0; i < dlug; i++) {
+  for (let i = 0; i < amount; i++) {
     let rndX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
     let rndY = Math.floor(Math.random() * (maxY - minY + 1) + minY);
 
     if (i !== 0) {
       for (let j = 0; j < rndArray.length; j++) {
         if (
-          // getDistance2({x:rndX, y:rndY}, rndArray[j])
-          getDistance(rndX, rndY, rndArray[j].x, rndArray[j].y) - radius * 2 <
-          0
+          getDistance2({ x: rndX, y: rndY, radius: radius }, rndArray[j])
+          // getDistance(rndX, rndY, rndArray[j].x, rndArray[j].y) - radius * 2 <
+          // 0
         ) {
           console.log("ta");
           rndX = Math.floor(Math.random() * (maxX - minX + 1) + minX);
@@ -137,21 +145,43 @@ function drawRandomPositions(dlug) {
   }
 }
 
-drawRandomPositions(10);
-console.log(rndArray);
 
-// function
-for (let el of rndArray) {
-  el.draw();
-}
-
-function getDistance(x1, y1, x2, y2) {
-  let xDistance = x1 - x2;
-  let yDistance = y1 - y2;
-  return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-}
-// function getDistance2(obj1, obj2) {
+// function getDistance(x1, y1, x2, y2) {
+//   let xDistance = x1 - x2;
+//   let yDistance = y1 - y2;
+//   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+// }
+// function getDistance(obj1, obj2) {
 //   let yDistance = obj1.y - obj2.y;
 //   let xDistance = obj1.x - obj2.x;
-//   return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2) < (obj1.radius + obj2.radius) );
+//   return  Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2))- (obj1.radius + obj2.radius);
+
 // }
+function getDistance2(obj1, obj2) {
+  let yDistance = obj1.y - obj2.y;
+  let xDistance = obj1.x - obj2.x;
+  let dist =
+    Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2)) -
+    (obj1.radius + obj2.radius);
+  if (dist <= 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+function ballSequence() {
+  // let order = 0;
+  for (const el of rndArray) {
+    el.color = "orange";
+  }
+  order++;
+  rndArray[order].color = "red";
+
+}
+
+
+
+drawRandomPositions(20);
+console.log(rndArray);
+rndArray[order].color = "red";

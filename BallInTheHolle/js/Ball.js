@@ -2,7 +2,9 @@
 
 const canvas = document.getElementById("app");
 var ctx = canvas.getContext("2d");
-const Vmax = 3;
+const Vmax = 5;
+export const Sx = 0.3
+export const Sy = 0.3
 
 // let leftBorder = 0 + radius;
 // let rightBorder = canvas.clientWidth - radius;
@@ -15,7 +17,7 @@ const Vmax = 3;
 //   left:(0 + this.radius),
 //   right:canvas.clientWidth - this.radius,
 // }
-export default class Circle {
+export class Circle {
   constructor(x, y, radius, color) {
     this.x = x;
     this.vx = 0;
@@ -31,19 +33,23 @@ export default class Circle {
       this.x += this.vx;
     if ((this.x + this.vx) < this.radius) {
       this.x = this.radius;
+      this.vx = -this.vx
     } else if ((this.x + this.vx) > canvas.clientWidth - this.radius) {
       this.x = canvas.clientWidth - this.radius;
+      this.vx = -this.vx
     }
+
       this.y += this.vy;
     if ((this.y + this.vy) < this.radius) {
       this.y = this.radius;
+      this.vy = -this.vy
     } else if ((this.y + this.vy) > canvas.clientHeight - this.radius) {
       this.y = canvas.clientHeight - this.radius;
+      this.vy = -this.vy
     }
-    console.log(this.x );
-    console.log(this.fx);
-    // this.draw();
-    //  border.top
+    // console.log(this.x );
+    // console.log(this.fx);
+
   }
   applyForce() {
     this.vx += this.fx;
@@ -56,6 +62,10 @@ export default class Circle {
     this.fx = fx;
     this.fy = fy;
   }
+  // setForce(fx, fy) {
+  //   this.fx = fx;
+  //   this.fy = fy;
+  // }
 
   limit(velocity, lowVmax, upVmax) {
     if (velocity < lowVmax) {

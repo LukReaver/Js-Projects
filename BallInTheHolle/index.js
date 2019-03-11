@@ -3,6 +3,7 @@ import Circle from "./js/Ball.js";
 const canvas = document.getElementById("app");
 // window.addEventListener("deviceorientation", orientationHandler);
 canvas.addEventListener("mousemove", mouse);
+window.addEventListener("mousemove", mouse2);
 
 let posX;
 let posY;
@@ -39,11 +40,14 @@ if (canvas.getContext) {
 function animationLoop() {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
 
+
+  blackBall.applyForce();
+  blackBall.update();
   blackBall.draw();
+
   for (let el of rndArray) {
     el.draw();
   }
-
   // posX = evt.x;
   // posY = evt.y;
   // console.log(posX)
@@ -100,13 +104,10 @@ function orientationHandler(evt) {
 }
 function mouse(e) {
   // console.log(e);
-  // console.log(e.y);
 
-  blackBall.x = e.layerX;
-  blackBall.y = e.layerY;
-  // blackBall.update();
-  // ballSequence(order)
-
+  // blackBall.x = e.layerX;
+  // blackBall.y = e.layerY;
+  //------------------------------------------
   for (let i = 0; i < rndArray.length; i++) {
     // console.log(getDistance(blackBall,rndArray[i]));
     if (getDistance2(blackBall, rndArray[i]) && i === order) {
@@ -115,6 +116,70 @@ function mouse(e) {
       console.log(order);
     }
   }
+  //------------------------------------------
+
+  // let midX =
+  let X =e.layerX
+  let Y =e.layerY
+  let maxX =canvas.width/2;
+  let maxY =canvas.height/2;
+  // console.log(midX);
+  let axisX =  Math.floor((X - maxX) /15  ); //13
+  let axisY =  Math.floor((Y - maxY) /20  )*-1; //14
+
+  // console.log( tocos1);
+  // console.log( tocos1);
+  canvas.style.transform =`perspective(400px) `;
+  canvas.style.transform +=`rotateY(${axisX}deg) `;
+  canvas.style.transform +=`rotateX(${axisY}deg) `;
+  // canvas.style.setProperty('transform',`rotateY(${tocos}deg) `)
+  // canvas.style.setProperty( ' transform','perspective(400px)')
+
+
+
+
+}
+
+export const Sx = 0.3
+export const Sy = 0.3
+
+function mouse2(e){
+
+
+  let mouseX =e.x;
+  let mouseY =e.y;
+  // let Y =e.layerY
+
+  // let minX = 0;
+  let halfWidth =innerWidth / 2;
+  let halfHeight =innerHeight / 2;
+
+  let mouseFromCenterX =   mouseX - halfWidth;
+  let mouseFromCenterY =   mouseY - halfHeight;
+
+
+  let   mapValueX = mapping(mouseFromCenterX,-halfWidth,halfWidth,-Sx,Sx );
+  let mapValueY = mapping(mouseFromCenterY,-halfHeight,halfHeight,-Sy,Sy );
+
+
+  // if (rightBorder > blackBall.x && leftBorder < blackBall.x) {
+  //    mapValueX = mapping(mouseFromCenterX,-halfWidth,halfWidth,-Sx,Sx );
+
+  // }
+
+  blackBall.setForce(mapValueX,mapValueY)
+
+
+  // console.log( mapValueX);
+  // console.log( mapValueY);
+
+}
+function mapping(x, Xmin ,Xmax,Ymin,Ymax ){
+
+  let a = (Ymin - Ymax)/(Xmin - Xmax);
+  let b = (Ymax - a * Xmax);
+
+  return a*x+b;
 }
 
 function drawRandomPositions(amount) {
@@ -140,8 +205,8 @@ function drawRandomPositions(amount) {
           j--;
         }
       }
+      rndArray.push(new Circle(rndX, rndY, radius, "orange"));
     }
-    rndArray.push(new Circle(rndX, rndY, radius, "orange"));
   }
 }
 

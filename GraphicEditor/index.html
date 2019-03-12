@@ -6,7 +6,7 @@
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.css">
 
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/x.y.z/css/bulma.css" />
+   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/x.y.z/css/bulma.css" /> -->
 
   <link rel="stylesheet" type="text/css" href="css/style.css"/>
 </head>
@@ -22,15 +22,20 @@
         <div class="hero-body">
           <div class="container">
            <div class="columns">
-             <div class="column has-background-link is-6 ">
-               <div id="photo"></div>
+             <div class="column has-background-link is-8 ">
+               <canvas id="photo"></canvas>
              </div>
-             <div class="column has-background-warning is-6">
+             <div class="column has-background-warning is-4">
                <div id="controls">
 
-                 <input id="sd1" class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" orient="vertical">
-                 <input id="sd2" class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" orient="vertical">
-                 <input id="sd3" class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" orient="vertical">
+                <label for="sd1">Gray</label>
+                <input id="sd1" class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" orient="vertical">
+                <label for="sd1">invert</label>
+                <input id="sd2" class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" orient="vertical">
+                <label for="sd1">dupa</label>
+                <input id="sd3" class="slider is-fullwidth" step="1" min="0" max="100" value="50" type="range" orient="vertical">
+                <label for="sd1">colorPicker</label>
+                <div id="colorPic"></div>
 
 
                 </div>

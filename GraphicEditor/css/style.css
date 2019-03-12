@@ -18,30 +18,39 @@ body{
 .wrapper{
 
 }
+.title{
+padding: 2rem;
+}
 
 #photo{
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: #080404;
-
+  height: 100%;
+  width: 100%;
 }
 #controls{
   padding: 1rem;
   background-color: #080404;
-  height: 50vh;
-
+  height: 100%;
 }
 
 .slider {
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* padding: 0rem 1.5rem 0rem; */
+  /* display: block; */
+  /* float: right; */
   /* display: flex;
   justify-content: center;
   align-items: center; */
   /* transform: rotateZ(270deg); */
-  height: 100%;
-  -webkit-appearance: none;
-  width: 2rem;
+  /* height: 100%; */
+  /* -webkit-appearance: none; */
+  width: 100%;
   /* display: block; */
-  -webkit-appearance: slider-vertical;
-  -webkit-appearance: none;
+  /* -webkit-appearance: slider-vertical; */
+  /* -webkit-appearance: none; */
+  /* width: 25px; */
 
   /* writing-mode: bt-lr;
   -webkit-appearance: slider-vertical;
@@ -59,8 +68,16 @@ body{
 
   /* padding: 0 5px; */
 }
+#colorPic{
+  width: 100%;
+  background: rgb(63, 205, 31);
+  height: 2rem;
+}
 
-.slider::-webkit-slider-thumb {
+
+
+
+/* .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 2rem;
@@ -76,4 +93,4 @@ body{
   border-radius: 5px;
   background: #4CAF50;
   cursor: pointer;
-}
+} */

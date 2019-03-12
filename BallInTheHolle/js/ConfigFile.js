@@ -7,7 +7,6 @@ export const config = {
     introText: "Catch all red balls!",
     fontSizeIntro: 50,
     fontSizeButton: 25,
-    ballAmount:10,
+    ballAmount:2,
     time:0,
-
   };

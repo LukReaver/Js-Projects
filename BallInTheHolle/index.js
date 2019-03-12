@@ -10,10 +10,6 @@ import {
   orientationHandler
 } from "./js/EventsHandlers.js";
 
-// fulescreen !!!!!!!
-// appearse sequence
-// mouse1 if width
-
 const canvas = document.getElementById("app");
 
 export let blackBall;
@@ -27,35 +23,70 @@ canvas.addEventListener("click", buttonStart);
 canvas.addEventListener("click", buttonRestart);
 
 if (detect()) {
+  canvas.addEventListener("click", launchIntoFullscreen);
   window.addEventListener("deviceorientation", orientationHandler);
   (config.Vmax = 10),
     (config.Sx = 5),
     (config.Sy = 5),
     (config.deceleration = 0.8);
-  canvas.removeEventListener("mousemove", mouse);
+  config.fontSizeIntro = 35;
+  canvas.style.width = "100%";
+  canvas.style.height = "100%";
 } else {
-  canvas.addEventListener("mousemove", mouseCss);
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    config.fontSizeIntro = 50;
+    window.addEventListener("mousemove", mouseCss);
+    console.log("Wersja na desktopy");
+  } else {
+    config.fontSizeIntro = 35;
+    console.log("Wersja mobilna");
+  }
   window.addEventListener("mousemove", mousePos);
 }
+
+window.addEventListener("resize", function() {
+  if (window.matchMedia("(min-width: 768px)").matches) {
+    window.addEventListener("mousemove", mouseCss);
+    config.fontSizeIntro = 50;
+    // console.log('Wersja na desktopy');
+  } else {
+    config.fontSizeIntro = 35;
+    window.removeEventListener("mousemove", mouseCss, false);
+    // console.log('Wersja mobilna');
+  }
+  canvas.style.transform = "";
+  canvas.width = canvas.clientWidth;
+  canvas.height = canvas.clientHeight;
+  init();
+});
 
 // ------ Init method -----------
 if (canvas.getContext) {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
   var ctx = canvas.getContext("2d");
-
+  init();
+} else {
+  alert("sry, you should update your browser");
+}
+// --------  Main init  ---------
+export function init() {
+  ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+  animationRequestId = undefined;
+  blackBall = null;
+  order = 0;
+  rndArray = [];
   blackBall = new Circle(
     canvas.clientWidth / 2,
     canvas.clientHeight / 2,
     config.radius,
     "black"
-  );
-
-  init();
-} else {
-  alert("sry, you should update your browser");
-}
-// --------  Main Loop  ---------
+    );
+    drawRandomPositions(config.ballAmount);
+    rndArray[order].color = "red";
+    bannerIntro();
+  }
+  // --------  Main Loop  ---------
 export function start() {
   if (!animationRequestId) {
     animationRequestId = window.requestAnimationFrame(animationLoop);
@@ -68,29 +99,15 @@ export function stop() {
     animationRequestId = undefined;
   }
 }
-export function init() {
-  ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
-  animationRequestId = undefined;
-  blackBall = null;
-  order = 0;
-  rndArray = [];
-  blackBall = new Circle(
-    canvas.clientWidth / 2,
-    canvas.clientHeight / 2,
-    config.radius,
-    "black"
-  );
-  drawRandomPositions(config.ballAmount);
-  rndArray[order].color = "red";
-  bannerIntro();
-}
 function animationLoop() {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
   blackBall.applyForce();
   blackBall.update();
   checkColision();
   for (let el of rndArray) {
-    el.draw();
+    if (el.color === "red") {
+      el.draw();
+    }
   }
   blackBall.draw();
 
@@ -102,7 +119,6 @@ function animationLoop() {
     requestAnimationFrame(animationLoop);
   }
 }
-
 //--------- Helpers ----------------
 // mapping properties
 export function mapping(x, Xmin, Xmax, Ymin, Ymax) {
@@ -152,17 +168,15 @@ function getDistance(obj1, obj2) {
 function checkColision() {
   for (let i = 0; i < rndArray.length; i++) {
     if (getDistance(blackBall, rndArray[i]) && i === order) {
-      ballSequence();
-      console.log("dupa");
-      // console.log(order);
+      rndArray[order].color = "#66A652";
+      order++;
+      if (rndArray.length - 1 >= order) {
+        rndArray[order].color = "red";
+      }
     }
   }
 }
-// set next ball into catch
-function ballSequence() {
-  rndArray[order].color = "#66A652";
-  order++;
-  if (rndArray.length - 1 >= order) {
-    rndArray[order].color = "red";
-  }
+// fulscreen
+function launchIntoFullscreen() {
+  document.documentElement.webkitRequestFullscreen();
 }

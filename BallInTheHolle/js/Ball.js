@@ -21,27 +21,27 @@ export class Circle {
 
   update() {
 
-    this.x += this.vx;   // console.log(this.vx)
+    this.x += this.vx;
     if ((this.x + this.vx) < this.radius) {
-      this.vx += config.deceleration
-      this.x = this.radius;
+      this.vx *= config.deceleration
       this.vx = -this.vx;
+      this.x = this.radius;
     }
     else if ((this.x + this.vx) > canvas.clientWidth - this.radius) {
-       this.vx -= config.deceleration
-       this.x = canvas.clientWidth - this.radius;
-       this.vx = -this.vx
+      this.vx *= config.deceleration
+      this.vx = -this.vx
+      this.x = canvas.clientWidth - this.radius;
     }
 
     this.y += this.vy;
     if ((this.y + this.vy) < this.radius) {
-      this.vy += config.deceleration
+      this.vy *= config.deceleration
+      this.vy = -this.vy
       this.y = this.radius;
-      this.vy = -this.vy
     } else if ((this.y + this.vy) > canvas.clientHeight - this.radius) {
-      this.vy -= config.deceleration
-      this.y = canvas.clientHeight - this.radius;
+      this.vy *= config.deceleration
       this.vy = -this.vy
+      this.y = canvas.clientHeight - this.radius;
     }
   }
 
@@ -71,6 +71,7 @@ export class Circle {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
     ctx.fillStyle = this.color;
+   
     ctx.fill();
     ctx.closePath();
   }

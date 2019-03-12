@@ -1,13 +1,20 @@
 import { Circle } from "./js/Ball.js";
 import detect from "./js/modileDetect.js";
 
+// fulescreen !!!!!!!
+// appearse sequence
+// mouse1 if width
+
 const canvas = document.getElementById("app");
 export const config = {
-  Vmax:5,
-  Sx:0.5,
-  Sy:0.5,
-  deceleration:1,
-}
+  Vmax: 8,
+  Sx: 0.5,
+  Sy: 0.5,
+  deceleration: 0.7,
+  introText: "Catch all red balls!",
+  fontSizeIntro: 50,
+  fontSizeButton: 25
+};
 let posXStart = canvas.clientWidth / 2;
 let posYStart = canvas.clientHeight / 2;
 let radius = 20;
@@ -15,14 +22,18 @@ let blackBall;
 const rndArray = [];
 let order = 0;
 
+let doAnim = true;
+
 console.log(detect());
+canvas.addEventListener("click", buttonStart);
 
 if (detect()) {
   window.addEventListener("deviceorientation", orientationHandler);
-  config.Vmax = 10,
-  config.Sx = 5,
-  config.Sy = 5,
-  config.deceleration = 2
+  (config.Vmax = 10),
+    (config.Sx = 5),
+    (config.Sy = 5),
+    (config.deceleration = 0.8);
+  canvas.removeEventListener("mousemove", mouse);
 } else {
   canvas.addEventListener("mousemove", mouse);
   window.addEventListener("mousemove", mouse2);
@@ -31,20 +42,82 @@ if (detect()) {
   // Sy:5,
   // deceleration:2,
 }
-
+//---------------------------------------------------
 if (canvas.getContext) {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
   var ctx = canvas.getContext("2d");
+  let cvHalfW = canvas.width / 2;
+  // let cvHalfH = canvas.height/2;
+
   blackBall = new Circle(posXStart, posYStart, radius, "black");
   drawRandomPositions(2);
   rndArray[order].color = "red";
-  animationLoop();
+
+  //--------------------------------
+  // intro
+  ctx.fillStyle = "#368";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  //banner
+  ctx.font = `${config.fontSizeIntro}px serif`;
+  ctx.fillStyle = "#000";
+  ctx.textAlign = "center";
+  ctx.fillText(config.introText, canvas.width / 2, (canvas.height * 1) / 3);
+  //start button
+  ctx.strokeRect(
+    cvHalfW - cvHalfW / 2,
+    canvas.height / 1.5,
+    cvHalfW,
+    config.fontSizeButton + 10
+  );
+
+  ctx.font = `${config.fontSizeButton}px serif`;
+  ctx.textAlign = "center";
+  ctx.fillText(
+    "Start",
+    canvas.width / 2,
+    canvas.height / 1.5 + config.fontSizeButton
+  );
+  //--------------------------------
+
+  // animationLoop();
 } else {
- alert('sry, you should update your browser')
+  alert("sry, you should update your browser");
+}
+function buttonStart(e) {
+  let cvHalfW = canvas.width / 2;
+  let x = e.layerX;
+  let y = e.layerY;
+  if (x > cvHalfW - cvHalfW / 2) {
+    if (x < cvHalfW - cvHalfW / 2 + cvHalfW) {
+      if (y > canvas.height / 1.5) {
+        if (
+          y <
+          canvas.height / 1.5 + (config.fontSizeButton + 10)) {
+            // console.log('testtext')
+            start();
+        }
+      }
+    }
+  }
+}
+let requestId;
+function start() {
+  if (!requestId) {
+    requestId = window.requestAnimationFrame(animationLoop);
+  }
 }
 
-function animationLoop() {
+// function stop() {
+//   if (requestId) {
+//     window.cancelAnimationFrame(requestId);
+//     requestId = undefined;
+//   }
+// }
+  //---------------------------------------------------
+  function animationLoop() {
+
+
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
   blackBall.applyForce();
   blackBall.update();
@@ -55,7 +128,7 @@ function animationLoop() {
   blackBall.draw();
   requestAnimationFrame(animationLoop);
 }
-//-------------------------------------------------------
+//-----------------------------------------------------
 function orientationHandler(evt) {
   let axisY = Math.round(evt.gamma); // 90 +/-
   let axisX = Math.round(evt.beta); // 180 +/-
@@ -75,10 +148,8 @@ function orientationHandler(evt) {
   mapValueX = mapping(axisY, -90, 90, -config.Sx, config.Sx);
   mapValueY = mapping(axisX, -90, 90, -config.Sy, config.Sy);
   blackBall.setForce(mapValueX, mapValueY);
-
 }
 function mouse(e) {
-
   let X = e.layerX;
   let Y = e.layerY;
   let maxX = canvas.width / 2;
@@ -87,13 +158,12 @@ function mouse(e) {
   let axisX = Math.floor((X - maxX) / 15); //13
   let axisY = Math.floor((Y - maxY) / 20) * -1; //14
 
-  canvas.style.transform = `perspective(400px) `;
+  canvas.style.transform = `perspective(600px) `;
   canvas.style.transform += `rotateY(${axisX}deg) `;
   canvas.style.transform += `rotateX(${axisY}deg) `;
 }
 
 function mouse2(e) {
-
   let mouseX = e.x;
   let mouseY = e.y;
 
@@ -103,8 +173,20 @@ function mouse2(e) {
   let mouseFromCenterX = mouseX - halfWidth;
   let mouseFromCenterY = mouseY - halfHeight;
 
-  let mapValueX = mapping(mouseFromCenterX, -halfWidth, halfWidth, -config.Sx, config.Sx);
-  let mapValueY = mapping(mouseFromCenterY, -halfHeight, halfHeight, -config.Sy, config.Sy);
+  let mapValueX = mapping(
+    mouseFromCenterX,
+    -halfWidth,
+    halfWidth,
+    -config.Sx,
+    config.Sx
+  );
+  let mapValueY = mapping(
+    mouseFromCenterY,
+    -halfHeight,
+    halfHeight,
+    -config.Sy,
+    config.Sy
+  );
 
   blackBall.setForce(mapValueX, mapValueY);
 }
@@ -137,7 +219,7 @@ function drawRandomPositions(amount) {
         }
       }
     }
-    rndArray.push(new Circle(rndX, rndY, radius, "orange"));
+    rndArray.push(new Circle(rndX, rndY, radius, "#66A652"));
   }
 }
 function getDistance(obj1, obj2) {
@@ -156,7 +238,7 @@ function getDistance(obj1, obj2) {
 function catchBall() {
   for (let i = 0; i < rndArray.length; i++) {
     if (getDistance(blackBall, rndArray[i]) && i === order) {
-       ballSequence();
+      ballSequence();
       console.log("dupa");
       // console.log(order);
     }
@@ -164,9 +246,9 @@ function catchBall() {
 }
 
 function ballSequence() {
-  rndArray[order].color = "orange";
+  rndArray[order].color = "#66A652";
   order++;
-  if ((rndArray.length-1) >= order) {
+  if (rndArray.length - 1 >= order) {
     rndArray[order].color = "red";
   }
 }

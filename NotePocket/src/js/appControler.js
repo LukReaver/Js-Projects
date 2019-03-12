@@ -45,7 +45,7 @@ function addORUpdateItem(e) {
   let noteList;
   // Checking method type
   const method = UiCtrl.DomElements.addNewNote.textContent;
-  
+
   // If method is 'Add', add item into list.
   if (method === "Add") {
     const noteContent = UiCtrl.getModalValues();

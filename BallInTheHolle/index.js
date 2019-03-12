@@ -1,49 +1,54 @@
-import { Sx, Sy, Circle } from "./js/Ball.js";
+import { Circle } from "./js/Ball.js";
 import detect from "./js/modileDetect.js";
 
 const canvas = document.getElementById("app");
-
+export const config = {
+  Vmax:5,
+  Sx:0.5,
+  Sy:0.5,
+  deceleration:1,
+}
+let posXStart = canvas.clientWidth / 2;
+let posYStart = canvas.clientHeight / 2;
+let radius = 20;
+let blackBall;
+const rndArray = [];
+let order = 0;
 
 console.log(detect());
 
 if (detect()) {
   window.addEventListener("deviceorientation", orientationHandler);
+  config.Vmax = 10,
+  config.Sx = 5,
+  config.Sy = 5,
+  config.deceleration = 2
 } else {
   canvas.addEventListener("mousemove", mouse);
   window.addEventListener("mousemove", mouse2);
+  // Vmax:10,
+  // Sx:5,
+  // Sy:5,
+  // deceleration:2,
 }
-
-
-let posXStart = canvas.clientWidth / 2;
-let posYStart = canvas.clientHeight / 2;
-let radius = 20;
-const sensitive = 3;
-let leftBorder = 0 + radius;
-let rightBorder = canvas.clientWidth - radius;
-let topBorder = 0 + radius;
-let bottomBorder = canvas.clientHeight - radius;
-let blackBall;
-const rndArray = [];
-let order = 0;
 
 if (canvas.getContext) {
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
   var ctx = canvas.getContext("2d");
   blackBall = new Circle(posXStart, posYStart, radius, "black");
-
-  drawRandomPositions(20);
+  drawRandomPositions(2);
   rndArray[order].color = "red";
-
   animationLoop();
 } else {
-  // canvas-unsupported code here
+ alert('sry, you should update your browser')
 }
 
 function animationLoop() {
   ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
   blackBall.applyForce();
   blackBall.update();
+  catchBall();
   for (let el of rndArray) {
     el.draw();
   }
@@ -52,58 +57,27 @@ function animationLoop() {
 }
 //-------------------------------------------------------
 function orientationHandler(evt) {
-  colision();
+  let axisY = Math.round(evt.gamma); // 90 +/-
+  let axisX = Math.round(evt.beta); // 180 +/-
 
-  // let axisY = parseInt(evt.gamma, 10);
-  let axisY = Math.round(evt.gamma)
-  let axisX = Math.round(evt.beta)
-  // let axisX = parseInt(evt.beta, 10);
-
+  if (axisX > 90) {
+    axisX = 90;
+  } else if (axisX < -90) {
+    axisX = -90;
+  }
   // console.log( mapValueX);
-  console.log(axisX);
+  // console.log(axisX);
   // console.log(axisY);
 
   let mapValueX;
   let mapValueY;
 
-  let halfWidth = innerWidth / 2;
-  let halfHeight = innerHeight / 2;
+  mapValueX = mapping(axisY, -90, 90, -config.Sx, config.Sx);
+  mapValueY = mapping(axisX, -90, 90, -config.Sy, config.Sy);
+  blackBall.setForce(mapValueX, mapValueY);
 
-  let pitchPhoneY = axisY - halfWidth;
-  let pitchPhoneX = axisX - halfHeight;
-
-  if (axisY < sensitive ) {
-    mapValueX = mapping(pitchPhoneY, -halfWidth, halfWidth, -Sx, Sx);
-    }
-    // if (axisX > sensitive || axisX < -sensitive ) {
-      mapValueY = mapping(pitchPhoneX, -halfHeight, halfHeight, -Sy, Sy);
-      // }
-      // console.log( mapValueX);
-      // console.log( mapValueY);
-
-      blackBall.setForce(mapValueX, mapValueY);
-  //--------------------------------------------------
-
-  // let speedtop = (axisX * -1) / 5;
-  // let speedbot = axisX / 5;
-
-  // let speedRight = axisY / 5;
-  // let speedLeft = (axisY * -1) / 5;
-
-  // if (axisY > sensitive && rightBorder > posXStart) {
-  //   blackBall.x += speedRight;
-  // } else if (axisY < -sensitive && leftBorder < posXStart) {
-  //   blackBall.x -= speedLeft;
-  // }
-
-  // if (axisX < -sensitive && posYStart > topBorder) {
-  //   blackBall.y -= speedtop;
-  // } else if (axisX > sensitive && posYStart < bottomBorder) {
-  //   blackBall.y += speedbot;
-  // }
 }
 function mouse(e) {
-  colision();
 
   let X = e.layerX;
   let Y = e.layerY;
@@ -119,7 +93,6 @@ function mouse(e) {
 }
 
 function mouse2(e) {
-  colision();
 
   let mouseX = e.x;
   let mouseY = e.y;
@@ -130,11 +103,13 @@ function mouse2(e) {
   let mouseFromCenterX = mouseX - halfWidth;
   let mouseFromCenterY = mouseY - halfHeight;
 
-  let mapValueX = mapping(mouseFromCenterX, -halfWidth, halfWidth, -Sx, Sx);
-  let mapValueY = mapping(mouseFromCenterY, -halfHeight, halfHeight, -Sy, Sy);
+  let mapValueX = mapping(mouseFromCenterX, -halfWidth, halfWidth, -config.Sx, config.Sx);
+  let mapValueY = mapping(mouseFromCenterY, -halfHeight, halfHeight, -config.Sy, config.Sy);
 
   blackBall.setForce(mapValueX, mapValueY);
 }
+
+// cofnac commita// ----------!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 function mapping(x, Xmin, Xmax, Ymin, Ymax) {
   let a = (Ymin - Ymax) / (Xmin - Xmax);
@@ -161,8 +136,8 @@ function drawRandomPositions(amount) {
           j = -1;
         }
       }
-      rndArray.push(new Circle(rndX, rndY, radius, "orange"));
     }
+    rndArray.push(new Circle(rndX, rndY, radius, "orange"));
   }
 }
 function getDistance(obj1, obj2) {
@@ -178,20 +153,20 @@ function getDistance(obj1, obj2) {
   }
 }
 
-function colision() {
+function catchBall() {
   for (let i = 0; i < rndArray.length; i++) {
     if (getDistance(blackBall, rndArray[i]) && i === order) {
-      _.debounce(ballSequence(), 1000);
+       ballSequence();
       console.log("dupa");
-      console.log(order);
+      // console.log(order);
     }
   }
 }
 
 function ballSequence() {
-  for (const el of rndArray) {
-    el.color = "orange";
-  }
+  rndArray[order].color = "orange";
   order++;
-  rndArray[order].color = "red";
+  if ((rndArray.length-1) >= order) {
+    rndArray[order].color = "red";
+  }
 }

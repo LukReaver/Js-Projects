@@ -1,11 +1,8 @@
-import { config } from '../index.js';
+import { config } from "./ConfigFile.js";
 
 const canvas = document.getElementById("app");
-var ctx = canvas.getContext("2d");
-// export const config.Vmax = 5;
-// export const Sx = 0.7
-// export const Sy = 0.7
-// export const config.deceleration = 0.5
+let ctx = canvas.getContext("2d");
+
 
 export class Circle {
   constructor(x, y, radius, color) {
@@ -71,7 +68,7 @@ export class Circle {
     ctx.beginPath();
     ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
     ctx.fillStyle = this.color;
-   
+
     ctx.fill();
     ctx.closePath();
   }

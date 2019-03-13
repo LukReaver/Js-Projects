@@ -26,6 +26,11 @@ To build this project i use:
 To build this project i use:
 - JavaScript es6
 
+### Run [-PhotoEditor-](https://lukreaver.github.io/Js-Projects/PhotoEditor/index.html)-;
+
+To build this project i use:
+- JavaScript es6
+
 ### Run [-Flappy Bird(PC)-](https://lukreaver.github.io/Js-Projects/FlappyBird-JS-/index.html);
 
 To build this project i use:

@@ -16,6 +16,11 @@ and project contain also:
 - ToDo List
 - Calculator
 
+### Run [-SoundKit-](https://lukreaver.github.io/Js-Projects/SoundKit/index.html)-;
+
+To build this project i use:
+- JavaScript es6
+
 ### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html)-;
 
 To build this project i use:

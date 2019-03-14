@@ -1,128 +1,117 @@
-import { styledMapType } from "./js/mapStyle.js";
+import { emitEvent, syncEvent } from "./js/socket.js";
+import { initMap, SetMarker } from "./js/mapGoG.js";
+import { getLocation } from "./js/location.js";
+import * as Config from "./js/config.js";
 
 let map, marker, infoWindow;
-let position = { lat: -34.397, lng: 150.644 };
-let step = 1;
+// let position = { lat: -34.397, lng: 150.644 };
+let PLAYER_SPEED = 1;
+export let players = [];
+// let users ;
+let userID;
+let serverPlayersAmount;
+const gameID = "This_Game";
 
-window.addEventListener("keyup", function() {});
-
-// -- main function --
-function main() {
-  geoLoc();
-  initMap();
-}
-// init map
-function initMap() {
-  map = new google.maps.Map(document.getElementById("map"), {
-    center: position,
-    keyboardShortcuts: false,
-    disableDefaultUI: true,
-    scrollwheel: false,
-    zoom: 8,
-    minZoom: 8
-  });
-
-  map.mapTypes.set("styled_map", styledMapType);
-  map.setMapTypeId("styled_map");
-
-  SetMarker();
-}
-
-function geoLoc() {
-  infoWindow = new google.maps.InfoWindow();
-
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      function(location) {
-        // pos = {
-        // console.log(pos)
-        pos.lat = location.coords.latitude;
-        pos.lng = location.coords.longitude;
-        // };
-        // console.log(pos)
-
-        infoWindow.setPosition(position);
-        infoWindow.setContent("Location found.");
-        infoWindow.open(map);
-        map.setCenter(position);
-        SetMarker();
-      },
-      function() {
-        handleLocationError(true, infoWindow, map.getCenter());
-      }
-    );
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }
-}
-
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(
-    browserHasGeolocation
-      ? "Error: The Geolocation service failed."
-      : "Error: Your browser doesn't support geolocation."
-  );
-  infoWindow.open(map);
-}
-
-function SetMarker() {
-  //Remove previous Marker.
-  if (marker != null) {
-    marker.setMap(null);
-  }
-  //Set Marker on Map.
-  var myLatlng = new google.maps.LatLng(pos.lat, pos.lng);
-  marker = new google.maps.Marker({
-    position: myLatlng,
-    map: map
-  });
-}
-
-function moveMarker(step) {
-  //Remove previous Marker.
-  if (marker != null) {
-    marker.setMap(null);
-  }
-  //Set Marker on Map.
-  var myLatlng = new google.maps.LatLng(pos.lat, pos.lng);
-  marker = new google.maps.Marker({
-    position: myLatlng,
-    map: map
-  });
-}
-
-// conection make
-var socket = io.connect("http://localhost:4000");
-
+// word wrap massage ----
+// send syns message eith
 //------
 
-let dialBox = document.getElementById("posts");
 let message = document.getElementById("message");
 let sendBtn = document.getElementById("buttonMessage");
-
-//-----
 
 // emit events
 sendBtn.addEventListener("click", function() {
   console.log("poszedlo");
   console.log(message.value);
-
-  socket.emit("chat", {
-    message: message.value
-    // //   handle:handle.value,
-  });
+  emitEvent(message.value, Config.PLAYER_MESSAGE, userID);
   message.value = "";
 });
 
-// listener for events
-socket.on("chat", function(data) {
-  //   dialBox.value = data.message;
+export function syncTab(tab) {
+  players = tab;
+}
 
-  let post = `<li class="post">TY:${data.message}</li>`;
-  dialBox.innerHTML += post;
+// -- main function --
+function main() {
+  // initConnecton();
+  getLocation
+    // .then(res=>console.log(res))
+    .then(res => {
+      initMap(res);
+      initGame(res);
+    });
+}
+
+function initGame(cords) {
+  userID = Math.floor(Math.random() * 99999);
+  addUser(userID, cords , SetMarker(userID, cords));
+  // SetMarker(userID, cords);
+  emitEvent(
+    `Player ${userID} just connected to the game.`,
+    Config.PLAYER_MESSAGE,
+    userID
+  );
+}
+
+// function addPlayer({playerId, position}) {
+
+  //   const player = {
+    //       playerId,
+    //       position,
+    //       marker
+    //   };
+
+    //   players.push(player);
+// }
+
+function addUser(userID, position ,marker) {
+
+  let user = {
+    userID: userID,
+    userPos: position,
+    marker:marker,
+  };
+  players.push(user);
+    console.log(user);
+}
+
+
+//-------------------------------------------------------------
+window.addEventListener("keyup", function(e) {
+  // onKeyPress();
+  console.log(e.key);
+  // console.log(players);
+  onKeyPress(e);
 });
+
+function onKeyPress(event) {
+  let { lat, lon } = players[0].userPos;
+
+  // console.log(players[0].userPos);
+  switch (event.key) {
+    case "ArrowLeft":
+      // changeMarkerPosition(players)
+      lon -= Config.PLAYER_SPEED;
+      break;
+    case "ArrowRight":
+      lon += Config.PLAYER_SPEED;
+      break;
+    case "ArrowUp":
+      lat += Config.PLAYER_SPEED;
+      break;
+    case "ArrowDown":
+      lat -= Config.PLAYER_SPEED;
+      break;
+  }
+
+  console.log(lat, lon);
+  // SetMarker(userID, { lat, lon });
+  emitEvent(
+    { lat, lon } ,
+    Config.PLAYER_MOVE,
+    userID
+  );
+  // // broadcastWsEvent({ lat, lng }, Events.PLAYER_MOVE);
+}
 
 document.addEventListener("DOMContentLoaded", main);

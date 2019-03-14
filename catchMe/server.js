@@ -1,5 +1,5 @@
 var express = require('express');
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 // var path = require("path");
 var socket = require('socket.io')
 
@@ -20,13 +20,24 @@ app.use(express.static('public'))
 //socket setup
 var io = socket(server)
 
+let tab = [];
+
 io.on('connection',(socket)=>{
 	console.log('Socket Connected !!!',socket.id )
 
 	//emit data everywhere
-	socket.on('chat',function(data){
-		io.emit('chat',data)
+	socket.on('Marker-Race',function(data){
+		io.emit('Marker-Race',data)
 	})
+	//emit data everywhere
+	socket.on('sync-ping',function(data){
+		io.emit('sync-ping',data)
+	})
+	//emit data everywhere
+	socket.on('setData',function(data){
+		io.emit('setData',data)
+	})
+
 
 })
 

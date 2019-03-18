@@ -5,8 +5,8 @@ let map, marker, infoWindow;
 export function initMap(cords) {
     // console.log(cords);
     let lat = parseFloat(cords.lat || cords.latitude);
-    let lon = parseFloat(cords.lon || cords.longitude);
-    let position = new google.maps.LatLng(lat, lon);
+    let lng = parseFloat(cords.lng || cords.longitude);
+    let position = new google.maps.LatLng(lat, lng);
 
     map = new google.maps.Map(document.getElementById("map"), {
       center: position,
@@ -24,9 +24,14 @@ export function initMap(cords) {
     console.log('fuckYe22')
   }
 
- export function SetMarker(userId , cords) {
+ export function SetMarker(userId , cords,marker) {
+//  export function SetMarker(user) {
+
+  // let { userID, userPos,marker } = user;
     let lat = parseFloat(cords.lat || cords.latitude);
-    let lon = parseFloat(cords.lon || cords.longitude);
+    let lng = parseFloat(cords.lng || cords.longitude);
+    // let lat = parseFloat(userPos.lat || userPos.latitude);
+    // let lng = parseFloat(userPos.lng || userPos.longitude);
     // var iconBase = 'https://maps.google.com/mapfiles/kml/paddle/';
     console.log('fuckYe333')
     // //Remove previous Marker.
@@ -34,8 +39,8 @@ export function initMap(cords) {
       marker.setMap(null);
     }
     //Set Marker on Map.
-    let myLatlng = new google.maps.LatLng(lat, lon);
-    map.setCenter(myLatlng)
+    let myLatlng = new google.maps.LatLng(lat, lng);
+    // map.setCenter(myLatlng)
    return marker = new google.maps.Marker({
       position: myLatlng,
       map: map,

@@ -10,7 +10,7 @@ export const getLocation = new Promise((resolve, rejects) => {
   // static cordinates (Warszawa)
   const data = {
     lat: 52.2319,
-    lon: 21.0067
+    lng: 21.0067
   };
   const options = {
     enableHighAccuracy: true,
@@ -25,7 +25,7 @@ export const getLocation = new Promise((resolve, rejects) => {
     const crd = await pos.coords;
     console.log('fuck1IN');
     data.lat = crd.latitude;
-    data.lon = crd.longitude;
+    data.lng = crd.longitude;
     resolve(data);
   }
 

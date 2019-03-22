@@ -1,5 +1,3 @@
-// import axios from 'axios';
-
 
 export const getLocation = new Promise((resolve, rejects) => {
   if (!navigator.geolocation) {
@@ -23,18 +21,16 @@ export const getLocation = new Promise((resolve, rejects) => {
   //Wait for cords
   async function success(pos) {
     const crd = await pos.coords;
-    console.log('fuck1IN');
     data.lat = crd.latitude;
     data.lng = crd.longitude;
     resolve(data);
   }
 
   function error() {
-    resolve(data);
-    // resolve(ipGeoLoc());
+    resolve(ipGeoLoc());
+    //  resolve(data);
     // rejects();
   }
-  console.log('fuck1Out');
 });
 
 async function ipGeoLoc(){

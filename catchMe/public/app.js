@@ -1,93 +1,54 @@
-import { emitEvent, syncEvent } from "./js/socket.js";
+import { emitEvent } from "./js/socket.js";
 import { initMap, SetMarker } from "./js/mapGoG.js";
 import { getLocation } from "./js/location.js";
 import * as Config from "./js/config.js";
 
-// let map, marker, infoWindow;
-// let position = { lat: -34.397, lng: 150.644 };
-let PLAYER_SPEED = 1;
-export let players = [];
-export let usersCurrent = {};
-let userID;
-// let serverPlayersAmount;
-const gameID = "This_Game";
-
-// word wrap massage ----
-// send syns message eith
-//------
-
 let message = document.getElementById("message");
 let sendBtn = document.getElementById("buttonMessage");
 
-// emit events
-sendBtn.addEventListener("click", function() {
-  console.log("poszedlo");
-  console.log(message.value);
-  emitEvent(message.value, Config.PLAYER_MESSAGE, userID);
-  message.value = "";
-});
+export const players = [];
+export let userID;
 
-export function syncTab(tab) {
-  players = tab;
-}
+//--- Add event listeners ---
+sendBtn.addEventListener("click", sendMessage);
+window.addEventListener("keyup",  onKeyPress);
 
 // -- main function --
 function main() {
-  // initConnecton();
   getLocation
-    // .then(res=>console.log(res))
     .then(res => {
       initMap(res);
       initGame(res);
-    });
+    }).catch(err => console.warn(err));
 }
-
+// init game
 function initGame(cords) {
-  userID = Math.floor(Math.random() * 99999);
-  addUser(userID, cords );
-  // SetMarker(userID, cords);
+  userID = Math.floor(Math.random() * 10);
+  addUser(userID, cords);
   emitEvent(
-    `Player ${userID} just connected to the game.`,
+    `New player connected to the game.`,
     Config.PLAYER_MESSAGE,
     userID
   );
-  emitEvent(
-    cords,
-    Config.PLAYER_CONNECTED,
-    userID
-  );
+  emitEvent(cords, Config.PLAYER_CONNECTED, userID);
 }
-
-export function addUser(userID, position ) {
-let mark = SetMarker(userID, position)
+// add User
+export function addUser(userID, position) {
+  let mark = SetMarker(userID, position);
   let user = {
     userID: userID,
     userPos: position,
-    // marker:marker,
-    marker:mark,
+    marker: mark
   };
-  // map.setCenter(position)
-  // usersCurrent = user
   players.push(user);
-    console.log(user);
 }
-//-------------------------------------------------------------
-window.addEventListener("keyup", function(e) {
-  // onKeyPress();
-  // console.log(e.key);
-  // console.log(players);
-  onKeyPress(e);
-});
-
+//player move
 function onKeyPress(event) {
-  let userXXX = players.find(user=>user.userID === userID);
-  console.log(userXXX);
-  let { lat, lng } = userXXX.userPos;
+  let curentUser = players.find(user => user.userID === userID);
+  let { lat, lng } = curentUser.userPos;
 
-  // console.log(players[0].userPos);
   switch (event.key) {
     case "ArrowLeft":
-      // changeMarkerPosition(players)
       lng -= Config.PLAYER_SPEED;
       break;
     case "ArrowRight":
@@ -100,15 +61,11 @@ function onKeyPress(event) {
       lat -= Config.PLAYER_SPEED;
       break;
   }
-
-  // console.log(lat, lng);
-  // SetMarker(userID, { lat, lng });
-  emitEvent(
-    { lat, lng } ,
-    Config.PLAYER_MOVE,
-    userID
-  );
-  // // broadcastWsEvent({ lat, lng }, Events.PLAYER_MOVE);
+  emitEvent({ lat, lng }, Config.PLAYER_MOVE, userID);
 }
-
+// send message
+function sendMessage(){
+  emitEvent(message.value, Config.PLAYER_MESSAGE, userID);
+  message.value = "";
+}
 document.addEventListener("DOMContentLoaded", main);

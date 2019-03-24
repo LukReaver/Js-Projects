@@ -16,39 +16,27 @@ and project contain also:
 - ToDo List
 - Calculator
 
-### Run [-SoundKit-](https://lukreaver.github.io/Js-Projects/SoundKit/index.html)-;
+### Run [-Marker-Race-](https://marker-race.herokuapp.com/)-;
 
-To build this project i use:
-- JavaScript es6
++ js, express, socket.io, googleMaps, czat app
++ deploy heroku
 
-### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html)-;
+### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html);
 
-To build this project i use:
-- JavaScript es6
-
-### Run [-PhotoEditor-](https://lukreaver.github.io/Js-Projects/PhotoEditor/index.html)-;
-
-To build this project i use:
-- JavaScript es6
+- Js, mvc, localstorage
 
 ### Run [-Flappy Bird(PC)-](https://lukreaver.github.io/Js-Projects/FlappyBird-JS-/index.html);
 
-To build this project i use:
-- JavaScript es6
-- canvas
+- Js, canvas
 
 ### Run [-Arkanoid(PC)-](https://lukreaver.github.io/Js-Projects/Arkanoid-Js/index.html);
 
-To build this project i use:
-- JavaScript es6
-- canvas
+- Js, canvas
 
 ### Run [-httpModule-](https://lukreaver.github.io/Js-Projects/httpModuleAsync/index.html);
 
-To build this project i use:
 - JavaScript es6
 
 ### Run [-Form-Validation-](https://lukreaver.github.io/Js-Projects/SurveyForm-ValidationModule/index.html)
 
-To build this project i use:
 - JavaScript es6

@@ -16,10 +16,28 @@ and project contain also:
 - ToDo List
 - Calculator
 
+### Run [-BallInTheHolle-](https://lukreaver.github.io/Js-Projects/BallInTheHolle/index.html)-;
+
++ JavaScript es6, PC and  Mobile version
+
 ### Run [-Marker-Race-](https://marker-race.herokuapp.com/)-;
 
-+ js, express, socket.io, googleMaps, czat app
-+ deploy heroku
++ You can move marker with arrow key,and talk with another player in the real time.
++ JavaScript es6
++ express,
++ socket.io,
++ googleMaps,
++ czat app,
++ deploy on heroku,
+
+### Run [-SoundKit-](https://lukreaver.github.io/Js-Projects/SoundKit/index.html)-;
+
++ JavaScript es6
++ You can record sound path in four channels and play all in the same time
+
+### Run [-PhotoEditor-](https://lukreaver.github.io/Js-Projects/PhotoEditor/index.html)-;
+
+- JavaScript es6
 
 ### Run [-NotePocket-](https://lukreaver.github.io/Js-Projects/NotePocket/dist/index.html);
 

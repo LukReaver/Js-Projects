@@ -36,7 +36,7 @@
     "webpack-md5-hash": "0.0.6"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.2.1",
     "css-reset-and-normalize": "^1.0.1",
     "leaflet": "^1.4.0",
